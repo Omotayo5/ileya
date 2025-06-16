@@ -1,20 +1,126 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    <title>Ileya Subscription Initiated</title>
+    <title>Subscription Initiated - Ileya</title>
     <style>
-        body { font-family: 'Poppins', sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; }
-        .container { max-width: 600px; margin: 20px auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        /* Reset and base styles */
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #263238;
+        }
+        
+        /* Container */
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+
+        /* Header */
+        .header {
+            background-color: #dc2626;
+            padding: 30px;
+            text-align: center;
+        }
+        .header img {
+            max-width: 120px;
+            height: auto;
+        }
+
+        /* Content */
+        .content {
+            padding: 30px;
+            line-height: 1.6;
+        }
+        .content h1 {
+            color: #dc2626;
+            font-size: 24px;
+            margin: 0 0 20px 0;
+        }
+        .content p {
+            margin-bottom: 20px;
+        }
+        .content ul {
+            margin: 20px 0;
+            padding-left: 20px;
+        }
+        .content ul li {
+            margin-bottom: 10px;
+            color: #666666;
+        }
+        .content .cta-button {
+            display: inline-block;
+            background-color: #dc2626;
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            margin-top: 20px;
+        }
+        .content .cta-button:hover {
+            background-color: #b32020;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #f7f7f7;
+            padding: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #777777;
+        }
+        .footer a {
+            color: #263238;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Preheader */
+        .preheader {
+            display: none !important;
+            visibility: hidden;
+            mso-hide: all;
+            font-size: 1px;
+            color: #ffffff;
+            max-height: 0px;
+            max-width: 0px;
+            opacity: 0;
+            overflow: hidden;
+        }
+
+        /* Responsive */
+        @media screen and (max-width: 600px) {
+            .container {
+                margin: 10px;
+            }
+            .content {
+                padding: 20px;
+            }
+            .content h1 {
+                font-size: 22px;
+            }
+            .content .cta-button {
+                width: 100%;
+                text-align: center;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="preheader">Subscription Process Started - Ileya</div>
     <div class="container">
         <div class="header">
-            <img src="[Logo URL]" alt="Ileya Logo" style="max-width: 150px;">
+            <img src="[Logo URL]" alt="Ileya Logo" style="max-width: 120px;">
         </div>
         <div class="content">
             <h1>Subscription Process Started</h1>
@@ -28,6 +134,7 @@
             </ul>
             <p>If you have any questions or need assistance, please contact our support team at support@ileya.com.</p>
             <p>Best regards,<br>The Ileya Team</p>
+            <a href="#" class="cta-button">Complete Subscription</a>
         </div>
         <div class="footer">
             <p>&copy; 2024 Ileya. All rights reserved.</p>
