@@ -60,10 +60,16 @@ async function subscriptionHandler(req, res) {
         if (userRows.length > 0) {
             const user = userRows[0];
             const emailData = {
-                "[User's Name]": user.full_name, // Add other placeholders like [Website URL] if needed
+                "[User's Name]": user.full_name,
+                "[Website URL]": process.env.BASE_URL || 'https://www.ileya.com'
             };
-            sendEmail(user.email, 'Subscription Initiated', 'subscription-initiated.html', emailData)
-                .catch(err => console.error('Error sending subscription initiated email:', err)); // Log error but don't block response
+            try {
+                await sendEmail(user.email, 'Subscription Initiated', 'subscription-initiated.html', emailData);
+                console.log('Subscription email sent successfully to:', user.email);
+            } catch (err) {
+                console.error('Error sending subscription initiated email:', err);
+                // Log error but don't block response
+            }
         }
 
         res.status(201).json({ success: true, message: 'Subscription initiated. Please complete payment.' });
