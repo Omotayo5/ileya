@@ -7,6 +7,75 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Profile Picture Container */
+        .profile-pic-container {
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        /* Profile Image */
+        .profile-pic-container img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            transition: opacity 0.3s ease;
+            display: none; /* Hidden by default */
+        }
+        
+        /* Default Icon */
+        .default-icon {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #ffffff;
+            border-radius: 50%;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+            z-index: 2;
+            pointer-events: auto; /* Enable interactions by default */
+        }
+        
+        /* Show/hide default icon based on profile picture */
+        .profile-pic-container img[src]:not([src='']) {
+            opacity: 1;
+        }
+        
+        /* Hover Effects */
+        .profile-pic-container:hover {
+            transform: scale(1.02);
+        }
+        
+        /* Profile Picture Upload */
+        .profile-pic-container {
+            cursor: pointer;
+        }
+        
+        /* Loading State */
+        .profile-pic-container.loading {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .profile-pic-container {
+                width: 100%;
+                max-width: 200px;
+                margin: 0 auto;
+            }
+        }
+    </style>
 </head>
 <body class="bg-gray-50 font-sans">
 
@@ -63,8 +132,16 @@
                     <div class="lg:col-span-1">
                         <div class="bg-white p-6 rounded-lg shadow-md text-center">
                             <div class="relative w-40 h-40 mx-auto mb-8">
-                                <div class="w-full h-full rounded-full overflow-hidden shadow-lg border-4 border-red-500 bg-white">
+                                <div class="w-full h-full rounded-full overflow-hidden shadow-lg border-4 border-red-500 bg-white relative">
                                     <img id="profilePictureImg" class="w-full h-full object-cover" src="" alt="User Profile Picture">
+                                    <div id="defaultProfileIcon" class="absolute inset-0 flex items-center justify-center bg-white opacity-1 transition-opacity duration-300">
+                                        <svg class="w-24 h-24 text-red-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                            <circle cx="12" cy="7" r="4"/>
+                                            <path d="M12 2v16"/>
+                                            <path d="M16 8l-4 4-4-4"/>
+                                        </svg>
+                                    </div>
                                 </div>
                                 <div class="absolute -bottom-3 -right-3">
                                     <label for="profilePictureInput" class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-red-600 text-white hover:bg-red-700 transition-colors">
@@ -146,7 +223,41 @@
             setTimeout(closeToast, duration);
         }
 
+        // Function to update profile picture state
+        function updateProfilePictureState(hasPicture) {
+            const profilePictureImg = document.getElementById('profilePictureImg');
+            const defaultIcon = document.getElementById('defaultProfileIcon');
+            
+            if (hasPicture) {
+                profilePictureImg.style.display = 'block';
+                profilePictureImg.style.opacity = '1';
+                defaultIcon.style.opacity = '0';
+                defaultIcon.style.pointerEvents = 'none';
+            } else {
+                profilePictureImg.style.display = 'none';
+                profilePictureImg.style.opacity = '0';
+                defaultIcon.style.opacity = '1';
+                defaultIcon.style.pointerEvents = 'auto';
+            }
+        }
+
+        // Set up MutationObserver to watch for changes to the image element
+        function setupProfilePictureObserver() {
+            const profilePictureImg = document.getElementById('profilePictureImg');
+            const observer = new MutationObserver((mutations) => {
+                mutations.forEach(mutation => {
+                    if (mutation.type === 'attributes' && mutation.attributeName === 'src') {
+                        console.log('Profile picture src changed:', mutation.oldValue, '->', profilePictureImg.src);
+                        // If the src is being set to something unexpected, reset it
+                        if (profilePictureImg.src && !profilePictureImg.src.startsWith('/uploads/avatars/')) {
+                            console.log('Preventing unwanted image update');
+                            profilePictureImg.src = '';
+                            updateProfilePictureState(false);
+                        }
+                    }
+                });
         document.addEventListener('DOMContentLoaded', async () => {
+            // Get all DOM elements
             const profilePictureImg = document.getElementById('profilePictureImg');
             const profilePictureInput = document.getElementById('profilePictureInput');
             const fullNameEl = document.querySelector('.text-center h2');
@@ -157,6 +268,30 @@
             const phoneNumberInput = document.getElementById('phoneNumber');
             const updateBtn = document.getElementById('updateProfileBtn');
             const originalBtnText = updateBtn.textContent;
+
+            // Set up MutationObserver for profile picture
+            const observer = new MutationObserver((mutations) => {
+                mutations.forEach(mutation => {
+                    if (mutation.type === 'attributes' && mutation.attributeName === 'src') {
+                        console.log('Profile picture src changed:', mutation.oldValue, '->', profilePictureImg.src);
+                        // Prevent unwanted images
+                        if (profilePictureImg.src && !profilePictureImg.src.startsWith('/uploads/avatars/') && profilePictureImg.src !== '') {
+                            console.log('Preventing unwanted image update:', profilePictureImg.src);
+                            profilePictureImg.src = '';
+                            updateProfilePictureState(false);
+                        }
+                    }
+                });
+            });
+
+            // Start observing the profile picture element
+            observer.observe(profilePictureImg, {
+                attributes: true,
+                attributeFilter: ['src']
+            });
+
+            // Initial state - show default icon
+            updateProfilePictureState(false);
 
             try {
                 const response = await fetch('/api/profile', { credentials: 'include' });
@@ -172,7 +307,29 @@
                     fullNameInput.value = user.fullName;
                     emailInput.value = user.email;
                     phoneNumberInput.value = user.phoneNumber || '';
-                    profilePictureImg.src = user.profilePicture;
+                    
+                    // Handle profile picture
+                    if (user.profilePicture) {
+                        // Only set the src if we have a valid profile picture
+                        if (user.profilePicture.startsWith('/uploads/avatars/')) {
+                            // First clear any existing src to prevent race conditions
+                            profilePictureImg.src = '';
+                            // Wait a brief moment to ensure the src is cleared
+                            setTimeout(() => {
+                                profilePictureImg.src = user.profilePicture;
+                                updateProfilePictureState(true);
+                            }, 100);
+                        } else {
+                            console.log('Invalid profile picture path:', user.profilePicture);
+                            profilePictureImg.src = '';
+                            updateProfilePictureState(false);
+                        }
+                    } else {
+                        // Clear the src
+                        profilePictureImg.src = '';
+                        // Update the picture state
+                        updateProfilePictureState(false);
+                    }
                 } else {
                     showToast(data.message || 'Could not load profile.', 'error');
                 }
