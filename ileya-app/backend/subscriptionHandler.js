@@ -56,12 +56,11 @@ async function subscriptionHandler(req, res) {
         await db.query('UPDATE users SET subscription_status = \'inactive\' WHERE id = ?', [userId]);
 
         // Send subscription initiated email
-        const [userRows] = await db.query('SELECT first_name, email FROM users WHERE id = ?', [userId]);
+        const [userRows] = await db.query('SELECT full_name, email FROM users WHERE id = ?', [userId]);
         if (userRows.length > 0) {
             const user = userRows[0];
             const emailData = {
-                "[User's Name]": user.first_name,
-                // Add other placeholders like [Website URL] if needed
+                "[User's Name]": user.full_name, // Add other placeholders like [Website URL] if needed
             };
             sendEmail(user.email, 'Subscription Initiated', 'subscription-initiated.html', emailData)
                 .catch(err => console.error('Error sending subscription initiated email:', err)); // Log error but don't block response

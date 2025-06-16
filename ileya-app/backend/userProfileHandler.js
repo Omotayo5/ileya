@@ -84,7 +84,7 @@ async function getProfile(req, res) {
         });
 
         // Always show either the user's profile picture or a fallback image
-        const profilePicture = user.profile_picture ? `/${user.profile_picture}` : '/uploads/default-profile-placeholder.svg';
+        const profilePicture = user.profile_picture ? `/${user.profile_picture}` : '/images/default-avatar.gif';
 
         res.status(200).json({
             success: true,
