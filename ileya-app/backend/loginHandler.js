@@ -75,7 +75,7 @@ async function handleLogin(req, res) {
                 success: true,
                 message: 'Login successful!',
                 user: req.session.user,
-                redirect: 'member-properties.html'
+                redirect: 'user-dashboard.html'
             });
         });
 

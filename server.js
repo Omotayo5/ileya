@@ -42,13 +42,21 @@ if (!fs.existsSync(uploadsDirRentals)) {
     console.log(`Created directory: ${uploadsDirRentals}`);
 }
 
+// Add detailed logging
+console.log('Starting Ileya server...');
+console.log('Node version:', process.version);
+console.log('Environment:', process.env.NODE_ENV || 'development');
+
 const app = express();
 
 const port = process.env.PORT || 3002; // Changed default port to 3002 to avoid conflicts
+console.log('Using port:', port);
 
 // Middleware to parse URL-encoded data (form submissions)
+console.log('Setting up URL-encoded body parser...');
 app.use(express.urlencoded({ extended: true }));
 // Middleware to parse JSON bodies
+console.log('Setting up JSON body parser...');
 app.use(express.json());
 
 // Session middleware

@@ -1,4 +1,4 @@
-// c:\Users\USER\Documents\Ileya\ileya-app\backend\userProfileHandler.js
+ // c:\Users\USER\Documents\Ileya\ileya-app\backend\userProfileHandler.js
 const pool = require('./database/db');
 const multer = require('multer');
 const path = require('path');
@@ -83,6 +83,9 @@ async function getProfile(req, res) {
             }
         });
 
+        // Always show either the user's profile picture or a fallback image
+        const profilePicture = user.profile_picture ? `/${user.profile_picture}` : '/uploads/default-profile-placeholder.svg';
+
         res.status(200).json({
             success: true,
             user: {
@@ -90,7 +93,7 @@ async function getProfile(req, res) {
                 fullName: user.full_name,
                 email: user.email,
                 phoneNumber: user.phone_number || '',
-                profilePicture: user.profile_picture ? `/${user.profile_picture}` : null,
+                profilePicture: profilePicture,
                 rentalStats: stats
             }
         });
