@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List New Rental - Ileya</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="max-w-4xl mx-auto">
+            <!-- Back Button -->
+            <div class="mb-8">
+                <button onclick="history.back()" class="inline-flex items-center text-sm font-medium text-gray-600 hover:text-gray-900">
+                    <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+                    </svg>
+                    Back
+                </button>
+            </div>
+
+            <div class="bg-white p-8 sm:p-10 rounded-xl shadow-lg">
+                <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-8">List a New Rental Property</h1>
+            
+            <form id="createRentalForm" class="space-y-6">
+                <!-- Property Title -->
+                <div>
+                    <label for="propertyTitle" class="block text-sm font-medium text-gray-700">Property Title</label>
+                    <input type="text" name="propertyTitle" id="propertyTitle" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm">
+                </div>
+
+
+
+                <!-- Rental Price -->
+                <div>
+                    <label for="rentalPrice" class="block text-sm font-medium text-gray-700">Rental Price (NGN per Year)</label>
+                    <input type="number" name="rentalPrice" id="rentalPrice" placeholder="e.g., 1500000" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm">
+                </div>
+
+                <!-- Location -->
+                <fieldset class="border border-gray-300 p-4 rounded-md">
+                    <legend class="text-sm font-medium text-gray-700 px-1">Location</legend>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="state" class="block text-xs font-medium text-gray-700">State</label>
+                            <select id="state" name="state" required class="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm">
+                                <option value="">Select State</option>
+                                <option value="Lagos">Lagos</option>
+                                <option value="Abuja">Abuja</option>
+                                <option value="Ibadan">Ibadan</option>
+                                <option value="Osun">Osun</option>
+                                <option value="Ondo State">Ondo</option>
+                                <option value="Calabar">Calabar</option>
+                                <option value="Ekiti">Ekiti</option>
+                                <option value="Benin">Benin</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="city" class="block text-xs font-medium text-gray-700">City / Area</label>
+                            <input type="text" id="city" name="city" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm" placeholder="e.g., Ikeja, Allen Avenue">
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- Property Details -->
+                <fieldset class="border border-gray-300 p-4 rounded-md">
+                    <legend class="text-sm font-medium text-gray-700 px-1">Property Details</legend>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="propertyType" class="block text-xs font-medium text-gray-700">Property Type</label>
+                            <select id="propertyType" name="propertyType" required class="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm">
+                                <option value="">Select type</option>
+                                <option value="apartment">Apartment</option>
+                                <option value="duplex">Duplex</option>
+                                <option value="house">House (Bungalow, Detached)</option>
+                                <option value=" single-room">Single-Room</option>
+                                <option value="shop">Shop</option>
+                                <option value="Office Space">Office Space</option>
+                                <option value="Selfcon">Selfcon</option>
+                                <option value="Room-Selfcon">A Room-Selfcon</option>
+                                <option value="Penthouse">Penthouse</option>
+                                <option value="Studio Apartment">Studio Apartment</option>
+                                <option value="Factory-store">Factory-store</option>
+                                <option value="Flat">Flat</option>
+                                <option value="Mini-Flat">Mini-Flat</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="bedrooms" class="block text-xs font-medium text-gray-700">Bedrooms</label>
+                            <input type="number" name="bedrooms" id="bedrooms" min="0" placeholder="e.g., 3" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm">
+                        </div>
+
+                    </div>
+                </fieldset>
+
+                <!-- Key Features & Amenities -->
+                <fieldset class="border border-gray-300 p-4 rounded-md">
+                    <legend class="text-sm font-medium text-gray-700 px-1">Key Features & Amenities</legend>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mt-2">
+                        <label class="flex items-center space-x-3">
+                            <input type="checkbox" name="features" value="24/7 Power" class="focus:ring-red-500 h-4 w-4 text-red-600 border-gray-300 rounded">
+                            <span class="text-sm text-gray-700">24/7 Power</span>
+                        </label>
+                        <label class="flex items-center space-x-3">
+                            <input type="checkbox" name="features" value="Security" class="focus:ring-red-500 h-4 w-4 text-red-600 border-gray-300 rounded">
+                            <span class="text-sm text-gray-700">Security</span>
+                        </label>
+                        <label class="flex items-center space-x-3">
+                            <input type="checkbox" name="features" value="Tiled Floors" class="focus:ring-red-500 h-4 w-4 text-red-600 border-gray-300 rounded">
+                            <span class="text-sm text-gray-700">Tiled Floors</span>
+                        </label>
+                        <label class="flex items-center space-x-3">
+                            <input type="checkbox" name="features" value="Parking Space" class="focus:ring-red-500 h-4 w-4 text-red-600 border-gray-300 rounded">
+                            <span class="text-sm text-gray-700">Parking Space</span>
+                        </label>
+                        <label class="flex items-center space-x-3">
+                            <input type="checkbox" name="features" value="Running Water" class="focus:ring-red-500 h-4 w-4 text-red-600 border-gray-300 rounded">
+                            <span class="text-sm text-gray-700">Running Water</span>
+                        </label>
+                        <label class="flex items-center space-x-3">
+                            <input type="checkbox" name="features" value="POP Ceiling" class="focus:ring-red-500 h-4 w-4 text-red-600 border-gray-300 rounded">
+                            <span class="text-sm text-gray-700">POP Ceiling</span>
+                        </label>
+                        <label class="flex items-center space-x-3">
+                            <input type="checkbox" name="features" value="Kitchen Cabinets" class="focus:ring-red-500 h-4 w-4 text-red-600 border-gray-300 rounded">
+                            <span class="text-sm text-gray-700">Kitchen Cabinets</span>
+                        </label>
+                        <label class="flex items-center space-x-3">
+                            <input type="checkbox" name="features" value="Serviced" class="focus:ring-red-500 h-4 w-4 text-red-600 border-gray-300 rounded">
+                            <span class="text-sm text-gray-700">Serviced</span>
+                        </label>
+                        <label class="flex items-center space-x-3">
+                            <input type="checkbox" name="features" value="Gated" class="focus:ring-red-500 h-4 w-4 text-red-600 border-gray-300 rounded">
+                            <span class="text-sm text-gray-700">Gated</span>
+                        </label>
+                        <label class="flex items-center space-x-3">
+                            <input type="checkbox" name="features" value="No Living with Landlord" class="focus:ring-red-500 h-4 w-4 text-red-600 border-gray-300 rounded">
+                            <span class="text-sm text-gray-700">No Living with Landlord</span>
+                        </label>
+                        <label class="flex items-center space-x-3">
+                            <input type="checkbox" name="features" value="CCTV" class="focus:ring-red-500 h-4 w-4 text-red-600 border-gray-300 rounded">
+                            <span class="text-sm text-gray-700">CCTV</span>
+                        </label>
+                    </div>
+                </fieldset>
+
+                <!-- Property Photos -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Property Photos (Max 6)</label>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
+                        <!-- Individual photo upload boxes -->
+                        <div class="photo-upload-box relative group">
+                            <input type="file" name="photos" class="hidden" accept="image/*" onchange="handlePhotoUpload(this, 0)">
+                            <div class="border-2 border-dashed border-gray-300 rounded-lg h-24 w-full overflow-hidden bg-gray-50 flex items-center justify-center cursor-pointer transition-all duration-200 hover:border-red-300" onclick="this.previousElementSibling.click()">
+                                <div class="absolute inset-0 flex items-center justify-center bg-white bg-opacity-80 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                                    <svg class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                    </svg>
+                                </div>
+                                <div class="text-center p-2 transition-opacity duration-200 group-hover:opacity-0">
+                                    <svg class="mx-auto h-8 w-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                    </svg>
+                                    <span class="text-xs text-gray-500">Add Photo</span>
+                                </div>
+                                <div class="preview-container absolute inset-0 w-full h-full"></div>
+                            </div>
+                        </div>
+                        <div class="photo-upload-box relative group">
+                            <input type="file" name="photos" class="hidden" accept="image/*" onchange="handlePhotoUpload(this, 1)">
+                            <div class="border-2 border-dashed border-gray-300 rounded-lg h-24 w-full overflow-hidden bg-gray-50 flex items-center justify-center cursor-pointer transition-all duration-200 hover:border-red-300" onclick="this.previousElementSibling.click()">
+                                <div class="absolute inset-0 flex items-center justify-center bg-white bg-opacity-80 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                                    <svg class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                    </svg>
+                                </div>
+                                <div class="text-center p-2 transition-opacity duration-200 group-hover:opacity-0">
+                                    <svg class="mx-auto h-8 w-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                    </svg>
+                                    <span class="text-xs text-gray-500">Add Photo</span>
+                                </div>
+                                <div class="preview-container absolute inset-0 w-full h-full"></div>
+                            </div>
+                        </div>
+                        <div class="photo-upload-box relative group">
+                            <input type="file" name="photos" class="hidden" accept="image/*" onchange="handlePhotoUpload(this, 2)">
+                            <div class="border-2 border-dashed border-gray-300 rounded-lg h-24 w-full overflow-hidden bg-gray-50 flex items-center justify-center cursor-pointer transition-all duration-200 hover:border-red-300" onclick="this.previousElementSibling.click()">
+                                <div class="absolute inset-0 flex items-center justify-center bg-white bg-opacity-80 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                                    <svg class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                    </svg>
+                                </div>
+                                <div class="text-center p-2 transition-opacity duration-200 group-hover:opacity-0">
+                                    <svg class="mx-auto h-8 w-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                    </svg>
+                                    <span class="text-xs text-gray-500">Add Photo</span>
+                                </div>
+                                <div class="preview-container absolute inset-0 w-full h-full"></div>
+                            </div>
+                        </div>
+                        <div class="photo-upload-box relative group">
+                            <input type="file" name="photos" class="hidden" accept="image/*" onchange="handlePhotoUpload(this, 3)">
+                            <div class="border-2 border-dashed border-gray-300 rounded-lg h-24 w-full overflow-hidden bg-gray-50 flex items-center justify-center cursor-pointer transition-all duration-200 hover:border-red-300" onclick="this.previousElementSibling.click()">
+                                <div class="absolute inset-0 flex items-center justify-center bg-white bg-opacity-80 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                                    <svg class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                    </svg>
+                                </div>
+                                <div class="text-center p-2 transition-opacity duration-200 group-hover:opacity-0">
+                                    <svg class="mx-auto h-8 w-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                    </svg>
+                                    <span class="text-xs text-gray-500">Add Photo</span>
+                                </div>
+                                <div class="preview-container absolute inset-0 w-full h-full"></div>
+                            </div>
+                        </div>
+                        <div class="photo-upload-box relative group">
+                            <input type="file" name="photos" class="hidden" accept="image/*" onchange="handlePhotoUpload(this, 4)">
+                            <div class="border-2 border-dashed border-gray-300 rounded-lg h-24 w-full overflow-hidden bg-gray-50 flex items-center justify-center cursor-pointer transition-all duration-200 hover:border-red-300" onclick="this.previousElementSibling.click()">
+                                <div class="absolute inset-0 flex items-center justify-center bg-white bg-opacity-80 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                                    <svg class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                    </svg>
+                                </div>
+                                <div class="text-center p-2 transition-opacity duration-200 group-hover:opacity-0">
+                                    <svg class="mx-auto h-8 w-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                    </svg>
+                                    <span class="text-xs text-gray-500">Add Photo</span>
+                                </div>
+                                <div class="preview-container absolute inset-0 w-full h-full"></div>
+                            </div>
+                        </div>
+                        <div class="photo-upload-box relative group">
+                            <input type="file" name="photos" class="hidden" accept="image/*" onchange="handlePhotoUpload(this, 5)">
+                            <div class="border-2 border-dashed border-gray-300 rounded-lg h-24 w-full overflow-hidden bg-gray-50 flex items-center justify-center cursor-pointer transition-all duration-200 hover:border-red-300" onclick="this.previousElementSibling.click()">
+                                <div class="absolute inset-0 flex items-center justify-center bg-white bg-opacity-80 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                                    <svg class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                    </svg>
+                                </div>
+                                <div class="text-center p-2 transition-opacity duration-200 group-hover:opacity-0">
+                                    <svg class="mx-auto h-8 w-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                    </svg>
+                                    <span class="text-xs text-gray-500">Add Photo</span>
+                                </div>
+                                <div class="preview-container absolute inset-0 w-full h-full"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="mt-1 text-xs text-gray-500">Upload up to 6 images. Max 5MB per image.</p>
+                </div>
+                
+                <!-- Contact Information -->
+                <div>
+                    <label for="contactRole" class="block text-sm font-medium text-gray-700">Your Role</label>
+                    <select id="contactRole" name="contact_role" required class="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm">
+                        <option value="">Select a role</option>
+                        <option value="agent">Agent</option>
+                        <option value="caretaker">Caretaker</option>
+                        <option value="landlord">Landlord</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="contactPhone" class="block text-sm font-medium text-gray-700">Your Contact Phone</label>
+                    <input type="tel" name="contact_phone" id="contactPhone" required placeholder="e.g., 08012345678" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm">
+                </div>
+
+
+                <!-- Submit Button -->
+                <div class="pt-2">
+                    <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                        Submit Listing
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="fixed top-20 right-5 z-50"></div>
+
+    <script src="js/main.js"></script>
+    <script>
+        // --- Toast Notification Logic ---
+        function showToast(message, type = 'success', duration = 5000) {
+            const container = document.getElementById('toast-container');
+            if (!container) return;
+
+            const toastId = 'toast-' + Date.now();
+            const toast = document.createElement('div');
+            toast.id = toastId;
+            toast.className = `flex items-center w-full max-w-xs p-4 mb-4 text-gray-600 bg-white rounded-lg shadow-lg transform transition-all duration-300 ease-in-out translate-x-full`;
+            toast.setAttribute('role', 'alert');
+
+            let iconHtml = '';
+            let colorClasses = '';
+
+            if (type === 'success') {
+                colorClasses = 'text-green-500 bg-green-100';
+                iconHtml = `<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>`;
+            } else if (type === 'error') {
+                colorClasses = 'text-red-500 bg-red-100';
+                iconHtml = `<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path></svg>`;
+            }
+
+            toast.innerHTML = `
+                <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 ${colorClasses} rounded-lg">
+                    ${iconHtml}
+                </div>
+                <div class="ml-3 text-sm font-normal">${message}</div>
+                <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8" aria-label="Close">
+                    <span class="sr-only">Close</span>
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                </button>
+            `;
+
+            container.appendChild(toast);
+
+            setTimeout(() => { toast.classList.remove('translate-x-full'); }, 10);
+
+            const closeButton = toast.querySelector('button');
+            const closeToast = () => {
+                toast.classList.add('translate-x-full');
+                setTimeout(() => { if (toast.parentNode) { toast.remove(); } }, 300);
+            };
+
+            closeButton.addEventListener('click', closeToast);
+            setTimeout(closeToast, duration);
+        }
+
+        function handlePhotoUpload(input, index) {
+            const file = input.files[0];
+            if (!file) return;
+
+            if (!file.type.startsWith('image/')) {
+                showToast('Please upload an image file (JPEG, PNG, etc.)', 'error');
+                input.value = '';
+                return;
+            }
+
+            if (file.size > 5 * 1024 * 1024) {
+                showToast('Image size should be less than 5MB', 'error');
+                input.value = '';
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const previewContainer = input.closest('.photo-upload-box').querySelector('.preview-container');
+                previewContainer.innerHTML = `
+                    <div class="relative w-full h-full">
+                        <img src="${e.target.result}" alt="Preview ${index + 1}" class="w-full h-full object-cover">
+                        <button type="button" 
+                                class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-200" 
+                                onclick="event.stopPropagation(); removePhoto(this, ${index})">
+                            ×
+                        </button>
+                    </div>`;
+                
+                const uploadText = input.nextElementSibling.querySelector('.text-center');
+                if (uploadText) uploadText.style.display = 'none';
+                
+                input.nextElementSibling.classList.remove('border-dashed', 'border-gray-300');
+                input.nextElementSibling.classList.add('border-solid', 'border-red-200');
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function removePhoto(button, index) {
+            event.stopPropagation();
+            const uploadBox = button.closest('.photo-upload-box');
+            const fileInput = uploadBox.querySelector('input[type="file"]');
+            const previewContainer = uploadBox.querySelector('.preview-container');
+            const uploadText = uploadBox.querySelector('.text-center');
+            
+            fileInput.value = '';
+            previewContainer.innerHTML = '';
+            if (uploadText) uploadText.style.display = 'block';
+            
+            const uploadArea = uploadBox.querySelector('div[onclick]');
+            uploadArea.classList.remove('border-solid', 'border-red-200');
+            uploadArea.classList.add('border-dashed', 'border-gray-300');
+        }
+
+        document.getElementById('createRentalForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const form = event.target;
+            const formData = new FormData(form);
+            const submitButton = form.querySelector('button[type="submit"]');
+            const originalButtonText = submitButton.innerHTML;
+
+            submitButton.disabled = true;
+            submitButton.innerHTML = '<svg class="animate-spin h-5 w-5 text-white mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>';
+
+            try {
+                const response = await fetch('/api/rentals/create', {
+                    method: 'POST',
+                    body: formData,
+                    credentials: 'include'
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    showToast('Rental listed successfully! Redirecting...', 'success');
+                    form.reset();
+                    document.querySelectorAll('.photo-upload-box').forEach(box => {
+                        const button = box.querySelector('button[onclick*="removePhoto"]');
+                        if (button) button.click();
+                    });
+                    setTimeout(() => {
+                        window.location.href = 'user-dashboard.html';
+                    }, 2000);
+                } else {
+                    showToast(result.message || 'An error occurred.', 'error');
+                }
+            } catch (error) {
+                console.error('Error submitting form:', error);
+                showToast('An unexpected error occurred. Please try again.', 'error');
+            } finally {
+                submitButton.disabled = false;
+                submitButton.innerHTML = originalButtonText;
+            }
+        });
+    </script>
+
+</body>
+</html>

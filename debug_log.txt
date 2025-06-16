@@ -1,0 +1,133 @@
+2025-06-15T15:05:59.511Z - --- NEW LOGIN ATTEMPT for email: omojowotayo04@gmail.com ---
+2025-06-15T15:05:59.741Z - User object found: {"id":4,"full_name":"Omotayo Omojowo","email":"omojowotayo04@gmail.com","password_hash":"$2b$10$LngRQEY5f.1qRPyQW.GSpuWSJhPmB6fW6N68bt5WV/pzVBAH8S4g2","phone_number":null,"profile_picture":null,"created_at":"2025-06-14T15:50:43.000Z","updated_at":"2025-06-14T15:50:43.000Z","subscription_status":"none","subscription_plan_id":null}
+2025-06-15T15:06:00.011Z - Password matches. Proceeding with subscription sync.
+2025-06-15T15:06:00.266Z - Subscription query found 1 rows.
+2025-06-15T15:06:00.274Z - Latest subscription record: {"id":2,"user_id":4,"status":"","start_date":"2025-06-15T11:42:54.000Z","end_date":"2025-07-15T11:42:54.000Z"}
+2025-06-15T15:06:00.276Z - Determined user is INACTIVE. (Status: , End Date: Tue Jul 15 2025 12:42:54 GMT+0100 (West Africa Standard Time))
+2025-06-15T15:06:00.278Z - [Login Sync] User 4 is INACTIVE. Forcing users table update.
+2025-06-15T15:06:00.313Z - Update result: {"fieldCount":0,"affectedRows":0,"insertId":0,"info":"Rows matched: 0  Changed: 0  Warnings: 0","serverStatus":2,"warningStatus":0,"changedRows":0}
+2025-06-15T15:06:00.446Z - Final state of user in DB after sync: {"id":4,"full_name":"Omotayo Omojowo","email":"omojowotayo04@gmail.com","password_hash":"$2b$10$LngRQEY5f.1qRPyQW.GSpuWSJhPmB6fW6N68bt5WV/pzVBAH8S4g2","phone_number":null,"profile_picture":null,"created_at":"2025-06-14T15:50:43.000Z","updated_at":"2025-06-14T15:50:43.000Z","subscription_status":"none","subscription_plan_id":null}
+2025-06-15T15:06:00.512Z - Login successful, session created.
+2025-06-15T15:06:00.529Z - --- END LOGIN ATTEMPT ---
+2025-06-15T15:06:00.730Z - Failed to send login notification email: TypeError [ERR_INVALID_ARG_TYPE]: The "path" argument must be of type string. Received undefined
+    at Object.join (node:path:478:7)
+    at sendEmail (C:\Users\USER\Documents\Ileya\Ileya\mailer.js:25:31)
+    at handleLogin (C:\Users\USER\Documents\Ileya\Ileya\ileya-app\backend\loginHandler.js:90:9)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-06-15T15:13:27.196Z - --- NEW LOGIN ATTEMPT for email: omojowotayo04@gmail.com ---
+2025-06-15T15:13:27.294Z - User object found: {"id":4,"full_name":"Omotayo Omojowo","email":"omojowotayo04@gmail.com","password_hash":"$2b$10$LngRQEY5f.1qRPyQW.GSpuWSJhPmB6fW6N68bt5WV/pzVBAH8S4g2","phone_number":null,"profile_picture":null,"created_at":"2025-06-14T15:50:43.000Z","updated_at":"2025-06-14T15:50:43.000Z","subscription_status":"none","subscription_plan_id":null}
+2025-06-15T15:13:27.461Z - Password matches. Proceeding with subscription sync.
+2025-06-15T15:13:27.469Z - Subscription query found 1 rows.
+2025-06-15T15:13:27.469Z - Latest subscription record: {"id":2,"user_id":4,"status":"","start_date":"2025-06-15T11:42:54.000Z","end_date":"2025-07-15T11:42:54.000Z"}
+2025-06-15T15:13:27.470Z - Determined user is INACTIVE. (Status: , End Date: Tue Jul 15 2025 12:42:54 GMT+0100 (West Africa Standard Time))
+2025-06-15T15:13:27.470Z - [Login Sync] User 4 is INACTIVE. Forcing users table update.
+2025-06-15T15:13:27.473Z - Update result: {"fieldCount":0,"affectedRows":0,"insertId":0,"info":"Rows matched: 0  Changed: 0  Warnings: 0","serverStatus":2,"warningStatus":0,"changedRows":0}
+2025-06-15T15:13:27.476Z - Final state of user in DB after sync: {"id":4,"full_name":"Omotayo Omojowo","email":"omojowotayo04@gmail.com","password_hash":"$2b$10$LngRQEY5f.1qRPyQW.GSpuWSJhPmB6fW6N68bt5WV/pzVBAH8S4g2","phone_number":null,"profile_picture":null,"created_at":"2025-06-14T15:50:43.000Z","updated_at":"2025-06-14T15:50:43.000Z","subscription_status":"none","subscription_plan_id":null}
+2025-06-15T15:13:27.477Z - Login successful, session created.
+2025-06-15T15:13:27.477Z - --- END LOGIN ATTEMPT ---
+2025-06-15T15:17:48.880Z - --- NEW LOGIN ATTEMPT for email: omojowotayo04@gmail.com ---
+2025-06-15T15:17:48.963Z - User object found: {"id":4,"full_name":"Omotayo Omojowo","email":"omojowotayo04@gmail.com","password_hash":"$2b$10$LngRQEY5f.1qRPyQW.GSpuWSJhPmB6fW6N68bt5WV/pzVBAH8S4g2","phone_number":null,"profile_picture":null,"created_at":"2025-06-14T15:50:43.000Z","updated_at":"2025-06-14T15:50:43.000Z","subscription_status":"none","subscription_plan_id":null}
+2025-06-15T15:17:49.146Z - Password matches. Proceeding with subscription sync.
+2025-06-15T15:17:49.151Z - Subscription query found 1 rows.
+2025-06-15T15:17:49.151Z - Latest subscription record: {"id":2,"user_id":4,"status":"","start_date":"2025-06-15T11:42:54.000Z","end_date":"2025-07-15T11:42:54.000Z"}
+2025-06-15T15:17:49.153Z - Determined user is INACTIVE. (Status: , End Date: Tue Jul 15 2025 12:42:54 GMT+0100 (West Africa Standard Time))
+2025-06-15T15:17:49.154Z - [Login Sync] User 4 is INACTIVE. Updating users table.
+2025-06-15T15:17:49.171Z - Final state of user in DB after sync: {"id":4,"full_name":"Omotayo Omojowo","email":"omojowotayo04@gmail.com","password_hash":"$2b$10$LngRQEY5f.1qRPyQW.GSpuWSJhPmB6fW6N68bt5WV/pzVBAH8S4g2","phone_number":null,"profile_picture":null,"created_at":"2025-06-14T15:50:43.000Z","updated_at":"2025-06-15T15:17:49.000Z","subscription_status":"none","subscription_plan_id":1}
+2025-06-15T15:17:49.171Z - Login successful, session created.
+2025-06-15T15:17:49.172Z - --- END LOGIN ATTEMPT ---
+2025-06-15T15:22:05.360Z - --- NEW LOGIN ATTEMPT for email: omojowotayo04@gmail.com ---
+2025-06-15T15:22:05.440Z - User object found: {"id":4,"full_name":"Omotayo Omojowo","email":"omojowotayo04@gmail.com","password_hash":"$2b$10$LngRQEY5f.1qRPyQW.GSpuWSJhPmB6fW6N68bt5WV/pzVBAH8S4g2","phone_number":null,"profile_picture":null,"created_at":"2025-06-14T15:50:43.000Z","updated_at":"2025-06-15T15:17:49.000Z","subscription_status":"none","subscription_plan_id":1}
+2025-06-15T15:22:05.742Z - Password matches. Proceeding with subscription sync.
+2025-06-15T15:22:05.749Z - Subscription query found 1 rows.
+2025-06-15T15:22:05.750Z - Latest subscription record: {"id":2,"user_id":4,"status":"expired","start_date":"2025-06-15T11:42:54.000Z","end_date":"2025-07-15T11:42:54.000Z"}
+2025-06-15T15:22:05.752Z - Determined user is INACTIVE. (Status: expired, End Date: Tue Jul 15 2025 12:42:54 GMT+0100 (West Africa Standard Time))
+2025-06-15T15:22:05.753Z - [Login Sync] User 4 is INACTIVE. Updating users table.
+2025-06-15T15:22:05.764Z - Final state of user in DB after sync: {"id":4,"full_name":"Omotayo Omojowo","email":"omojowotayo04@gmail.com","password_hash":"$2b$10$LngRQEY5f.1qRPyQW.GSpuWSJhPmB6fW6N68bt5WV/pzVBAH8S4g2","phone_number":null,"profile_picture":null,"created_at":"2025-06-14T15:50:43.000Z","updated_at":"2025-06-15T15:22:05.000Z","subscription_status":"","subscription_plan_id":1}
+2025-06-15T15:22:05.767Z - Login successful, session created.
+2025-06-15T15:22:05.769Z - --- END LOGIN ATTEMPT ---
+2025-06-15T15:27:10.825Z - --- NEW LOGIN ATTEMPT for email: omojowotayo04@gmail.com ---
+2025-06-15T15:27:10.925Z - User object found: {"id":4,"full_name":"Omotayo Omojowo","email":"omojowotayo04@gmail.com","password_hash":"$2b$10$LngRQEY5f.1qRPyQW.GSpuWSJhPmB6fW6N68bt5WV/pzVBAH8S4g2","phone_number":null,"profile_picture":null,"created_at":"2025-06-14T15:50:43.000Z","updated_at":"2025-06-15T15:22:05.000Z","subscription_status":"","subscription_plan_id":1}
+2025-06-15T15:27:11.105Z - Password matches. Proceeding with subscription sync.
+2025-06-15T15:27:11.109Z - Subscription query found 1 rows.
+2025-06-15T15:27:11.109Z - Latest subscription record: {"id":2,"user_id":4,"status":"expired","start_date":"2025-06-15T11:42:54.000Z","end_date":"2025-07-15T15:26:01.000Z"}
+2025-06-15T15:27:11.110Z - Determined user is ACTIVE based on end_date: Tue Jul 15 2025 16:26:01 GMT+0100 (West Africa Standard Time)
+2025-06-15T15:27:11.110Z - [Login Sync] User 4 is ACTIVE. Forcing all tables to active state.
+2025-06-15T15:27:11.123Z - Final state of user in DB after sync: {"id":4,"full_name":"Omotayo Omojowo","email":"omojowotayo04@gmail.com","password_hash":"$2b$10$LngRQEY5f.1qRPyQW.GSpuWSJhPmB6fW6N68bt5WV/pzVBAH8S4g2","phone_number":null,"profile_picture":null,"created_at":"2025-06-14T15:50:43.000Z","updated_at":"2025-06-15T15:27:11.000Z","subscription_status":"active","subscription_plan_id":2}
+2025-06-15T15:27:11.123Z - Login successful, session created.
+2025-06-15T15:27:11.124Z - --- END LOGIN ATTEMPT ---
+2025-06-15T15:31:05.352Z - --- NEW LOGIN ATTEMPT for email: skayode61@gamil.com ---
+2025-06-15T15:31:05.361Z - User not found in database.
+2025-06-15T15:31:26.543Z - --- NEW LOGIN ATTEMPT for email: skayode61@gamil.com ---
+2025-06-15T15:31:26.546Z - User not found in database.
+2025-06-15T15:32:55.616Z - --- NEW LOGIN ATTEMPT for email: tamopei20@gmail.com ---
+2025-06-15T15:32:55.619Z - User object found: {"id":6,"full_name":"Omotayo Omojowo","email":"tamopei20@gmail.com","password_hash":"$2b$10$ECCbcGviXVoVIMQjb5bUrOR4/Qbmsrq4is3auStgEqpsMJy5KiLcq","phone_number":null,"profile_picture":null,"created_at":"2025-06-15T15:32:36.000Z","updated_at":"2025-06-15T15:32:36.000Z","subscription_status":"none","subscription_plan_id":null}
+2025-06-15T15:32:55.794Z - Password matches. Proceeding with subscription sync.
+2025-06-15T15:32:55.796Z - Subscription query found 1 rows.
+2025-06-15T15:32:55.797Z - Latest subscription record: {"id":9,"user_id":6,"status":"active","start_date":"2025-06-15T15:32:36.000Z","end_date":"2025-07-15T15:32:36.000Z"}
+2025-06-15T15:32:55.797Z - Determined user is ACTIVE based on end_date: Tue Jul 15 2025 16:32:36 GMT+0100 (West Africa Standard Time)
+2025-06-15T15:32:55.798Z - [Login Sync] User 6 is ACTIVE. Forcing all tables to active state.
+2025-06-15T15:32:55.816Z - Final state of user in DB after sync: {"id":6,"full_name":"Omotayo Omojowo","email":"tamopei20@gmail.com","password_hash":"$2b$10$ECCbcGviXVoVIMQjb5bUrOR4/Qbmsrq4is3auStgEqpsMJy5KiLcq","phone_number":null,"profile_picture":null,"created_at":"2025-06-15T15:32:36.000Z","updated_at":"2025-06-15T15:32:55.000Z","subscription_status":"active","subscription_plan_id":2}
+2025-06-15T15:32:55.817Z - Login successful, session created.
+2025-06-15T15:32:55.817Z - --- END LOGIN ATTEMPT ---
+2025-06-15T15:33:47.352Z - --- NEW LOGIN ATTEMPT for email: omojowo7@gmail.com ---
+2025-06-15T15:33:47.357Z - User object found: {"id":1,"full_name":"omotayo omojowo","email":"omojowo7@gmail.com","password_hash":"$2b$10$Ka8TuwLo5/3gSOmNXrcOjeKlcek5SsDlv2DdVQZlnFrJkR9VNUA/W","phone_number":"08106557593","profile_picture":"uploads/avatars/avatar-1-1749555699713-896785179.jpg","created_at":"2025-06-09T18:56:33.000Z","updated_at":"2025-06-10T11:41:39.000Z","subscription_status":"none","subscription_plan_id":null}
+2025-06-15T15:33:47.538Z - Password matches. Proceeding with subscription sync.
+2025-06-15T15:33:47.540Z - Subscription query found 1 rows.
+2025-06-15T15:33:47.541Z - Latest subscription record: {"id":1,"user_id":1,"status":"","start_date":"2025-06-15T11:42:54.000Z","end_date":"2025-07-15T11:42:54.000Z"}
+2025-06-15T15:33:47.541Z - Determined user is ACTIVE based on end_date: Tue Jul 15 2025 12:42:54 GMT+0100 (West Africa Standard Time)
+2025-06-15T15:33:47.542Z - [Login Sync] User 1 is ACTIVE. Forcing all tables to active state.
+2025-06-15T15:33:47.557Z - Final state of user in DB after sync: {"id":1,"full_name":"omotayo omojowo","email":"omojowo7@gmail.com","password_hash":"$2b$10$Ka8TuwLo5/3gSOmNXrcOjeKlcek5SsDlv2DdVQZlnFrJkR9VNUA/W","phone_number":"08106557593","profile_picture":"uploads/avatars/avatar-1-1749555699713-896785179.jpg","created_at":"2025-06-09T18:56:33.000Z","updated_at":"2025-06-15T15:33:47.000Z","subscription_status":"active","subscription_plan_id":2}
+2025-06-15T15:33:47.558Z - Login successful, session created.
+2025-06-15T15:33:47.564Z - --- END LOGIN ATTEMPT ---
+2025-06-15T15:44:24.925Z - --- NEW LOGIN ATTEMPT for email: omojowo7@gmail.com ---
+2025-06-15T15:44:24.963Z - User object found: {"id":1,"full_name":"omotayo omojowo","email":"omojowo7@gmail.com","password_hash":"$2b$10$Ka8TuwLo5/3gSOmNXrcOjeKlcek5SsDlv2DdVQZlnFrJkR9VNUA/W","phone_number":"08106557593","profile_picture":"uploads/avatars/avatar-1-1749555699713-896785179.jpg","created_at":"2025-06-09T18:56:33.000Z","updated_at":"2025-06-15T15:33:47.000Z","subscription_status":"active","subscription_plan_id":2}
+2025-06-15T15:44:25.155Z - Password matches. Proceeding with subscription sync.
+2025-06-15T15:44:25.159Z - Subscription query found 1 rows.
+2025-06-15T15:44:25.159Z - Latest subscription record: {"id":1,"user_id":1,"status":"expired","start_date":"2025-06-15T11:42:54.000Z","end_date":"2025-07-15T11:42:54.000Z"}
+2025-06-15T15:44:25.159Z - Determined user is INACTIVE due to status or end_date. (Status: expired, End Date: Tue Jul 15 2025 12:42:54 GMT+0100 (West Africa Standard Time))
+2025-06-15T15:44:25.160Z - [Login Sync] User 1 is INACTIVE. Syncing users table.
+2025-06-15T15:44:25.173Z - Final state of user in DB after sync: {"id":1,"full_name":"omotayo omojowo","email":"omojowo7@gmail.com","password_hash":"$2b$10$Ka8TuwLo5/3gSOmNXrcOjeKlcek5SsDlv2DdVQZlnFrJkR9VNUA/W","phone_number":"08106557593","profile_picture":"uploads/avatars/avatar-1-1749555699713-896785179.jpg","created_at":"2025-06-09T18:56:33.000Z","updated_at":"2025-06-15T15:44:25.000Z","subscription_status":"","subscription_plan_id":1}
+2025-06-15T15:44:25.174Z - Login successful, session created.
+2025-06-15T15:44:25.174Z - --- END LOGIN ATTEMPT ---
+2025-06-15T15:44:38.093Z - --- NEW LOGIN ATTEMPT for email: omojowotayo04@gmail.com ---
+2025-06-15T15:44:38.096Z - User object found: {"id":4,"full_name":"Omotayo Omojowo","email":"omojowotayo04@gmail.com","password_hash":"$2b$10$LngRQEY5f.1qRPyQW.GSpuWSJhPmB6fW6N68bt5WV/pzVBAH8S4g2","phone_number":null,"profile_picture":null,"created_at":"2025-06-14T15:50:43.000Z","updated_at":"2025-06-15T15:27:11.000Z","subscription_status":"active","subscription_plan_id":2}
+2025-06-15T15:44:38.255Z - Password matches. Proceeding with subscription sync.
+2025-06-15T15:44:38.259Z - Subscription query found 1 rows.
+2025-06-15T15:44:38.259Z - Latest subscription record: {"id":2,"user_id":4,"status":"expired","start_date":"2025-06-15T11:42:54.000Z","end_date":"2025-07-15T15:26:01.000Z"}
+2025-06-15T15:44:38.260Z - Determined user is INACTIVE due to status or end_date. (Status: expired, End Date: Tue Jul 15 2025 16:26:01 GMT+0100 (West Africa Standard Time))
+2025-06-15T15:44:38.261Z - [Login Sync] User 4 is INACTIVE. Syncing users table.
+2025-06-15T15:44:38.273Z - Final state of user in DB after sync: {"id":4,"full_name":"Omotayo Omojowo","email":"omojowotayo04@gmail.com","password_hash":"$2b$10$LngRQEY5f.1qRPyQW.GSpuWSJhPmB6fW6N68bt5WV/pzVBAH8S4g2","phone_number":null,"profile_picture":null,"created_at":"2025-06-14T15:50:43.000Z","updated_at":"2025-06-15T15:44:38.000Z","subscription_status":"","subscription_plan_id":1}
+2025-06-15T15:44:38.274Z - Login successful, session created.
+2025-06-15T15:44:38.274Z - --- END LOGIN ATTEMPT ---
+2025-06-15T15:48:31.660Z - --- NEW LOGIN ATTEMPT for email: omojowotayo04@gmail.com ---
+2025-06-15T15:48:31.664Z - User object found: {"id":4,"full_name":"Omotayo Omojowo","email":"omojowotayo04@gmail.com","password_hash":"$2b$10$LngRQEY5f.1qRPyQW.GSpuWSJhPmB6fW6N68bt5WV/pzVBAH8S4g2","phone_number":null,"profile_picture":null,"created_at":"2025-06-14T15:50:43.000Z","updated_at":"2025-06-15T15:44:38.000Z","subscription_status":"","subscription_plan_id":1}
+2025-06-15T15:48:31.826Z - Password matches. Proceeding with subscription sync.
+2025-06-15T15:48:31.828Z - Subscription query found 1 rows.
+2025-06-15T15:48:31.829Z - Latest subscription record: {"id":2,"user_id":4,"status":"expired","start_date":"2025-06-15T11:42:54.000Z","end_date":"2025-07-15T15:26:01.000Z"}
+2025-06-15T15:48:31.829Z - Determined user is INACTIVE due to status or end_date. (Status: expired, End Date: Tue Jul 15 2025 16:26:01 GMT+0100 (West Africa Standard Time))
+2025-06-15T15:48:31.830Z - [Login Sync] User 4 is INACTIVE. Syncing users table.
+2025-06-15T15:48:31.834Z - Final state of user in DB after sync: {"id":4,"full_name":"Omotayo Omojowo","email":"omojowotayo04@gmail.com","password_hash":"$2b$10$LngRQEY5f.1qRPyQW.GSpuWSJhPmB6fW6N68bt5WV/pzVBAH8S4g2","phone_number":null,"profile_picture":null,"created_at":"2025-06-14T15:50:43.000Z","updated_at":"2025-06-15T15:44:38.000Z","subscription_status":"","subscription_plan_id":1}
+2025-06-15T15:48:31.840Z - Login successful, session created.
+2025-06-15T15:48:31.840Z - --- END LOGIN ATTEMPT ---
+2025-06-15T15:56:25.671Z - --- NEW LOGIN ATTEMPT for email: omojowotayo04@gmail.com ---
+2025-06-15T15:56:25.676Z - User object found: {"id":4,"full_name":"Omotayo Omojowo","email":"omojowotayo04@gmail.com","password_hash":"$2b$10$LngRQEY5f.1qRPyQW.GSpuWSJhPmB6fW6N68bt5WV/pzVBAH8S4g2","phone_number":null,"profile_picture":null,"created_at":"2025-06-14T15:50:43.000Z","updated_at":"2025-06-15T15:44:38.000Z","subscription_status":"","subscription_plan_id":1}
+2025-06-15T15:56:25.853Z - Password matches. Proceeding with subscription sync.
+2025-06-15T15:56:25.856Z - Subscription query found 1 rows.
+2025-06-15T15:56:25.856Z - Latest subscription record: {"id":2,"user_id":4,"status":"expired","start_date":"2025-06-15T11:42:54.000Z","end_date":"2025-07-15T15:26:01.000Z"}
+2025-06-15T15:56:25.857Z - Determined user is INACTIVE due to status or end_date. (Status: expired, End Date: Tue Jul 15 2025 16:26:01 GMT+0100 (West Africa Standard Time))
+2025-06-15T15:56:25.858Z - [Login Sync] User 4 is INACTIVE. Syncing users table.
+2025-06-15T15:56:25.862Z - Final state of user in DB after sync: {"id":4,"full_name":"Omotayo Omojowo","email":"omojowotayo04@gmail.com","password_hash":"$2b$10$LngRQEY5f.1qRPyQW.GSpuWSJhPmB6fW6N68bt5WV/pzVBAH8S4g2","phone_number":null,"profile_picture":null,"created_at":"2025-06-14T15:50:43.000Z","updated_at":"2025-06-15T15:44:38.000Z","subscription_status":"","subscription_plan_id":1}
+2025-06-15T15:56:25.863Z - Login successful, session created.
+2025-06-15T15:56:25.863Z - --- END LOGIN ATTEMPT ---
+2025-06-15T16:01:48.866Z - --- NEW LOGIN ATTEMPT for email: omojowotayo04@gmail.com ---
+2025-06-15T16:01:48.937Z - User object found: {"id":4,"full_name":"Omotayo Omojowo","email":"omojowotayo04@gmail.com","password_hash":"$2b$10$LngRQEY5f.1qRPyQW.GSpuWSJhPmB6fW6N68bt5WV/pzVBAH8S4g2","phone_number":null,"profile_picture":null,"created_at":"2025-06-14T15:50:43.000Z","updated_at":"2025-06-15T15:44:38.000Z","subscription_status":"","subscription_plan_id":1}
+2025-06-15T16:01:49.123Z - Password matches. Proceeding with subscription sync.
+2025-06-15T16:01:49.127Z - Subscription query found 1 rows.
+2025-06-15T16:01:49.128Z - Latest subscription record: {"id":2,"user_id":4,"status":"active","start_date":"2025-06-15T11:42:54.000Z","end_date":"2025-07-15T15:26:01.000Z"}
+2025-06-15T16:01:49.128Z - [Login Sync] Detected non-numeric status ('active') for a subscription with a future end_date. This indicates data corruption. Forcing status to 2 (Active).
+2025-06-15T16:01:49.142Z - Re-fetched subscription record after fix: {"id":2,"user_id":4,"plan_id":1,"status":"expired","start_date":"2025-06-15T11:42:54.000Z","end_date":"2025-07-15T15:26:01.000Z","created_at":"2025-06-15T11:42:54.000Z","updated_at":"2025-06-15T16:01:49.000Z"}
+2025-06-15T16:01:49.142Z - Determined user is INACTIVE due to status or end_date. (Status: expired, End Date: Tue Jul 15 2025 16:26:01 GMT+0100 (West Africa Standard Time))
+2025-06-15T16:01:49.143Z - [Login Sync] User 4 is INACTIVE. Syncing users table.
+2025-06-15T16:01:49.150Z - Final state of user in DB after sync: {"id":4,"full_name":"Omotayo Omojowo","email":"omojowotayo04@gmail.com","password_hash":"$2b$10$LngRQEY5f.1qRPyQW.GSpuWSJhPmB6fW6N68bt5WV/pzVBAH8S4g2","phone_number":null,"profile_picture":null,"created_at":"2025-06-14T15:50:43.000Z","updated_at":"2025-06-15T15:44:38.000Z","subscription_status":"","subscription_plan_id":1}
+2025-06-15T16:01:49.151Z - Login successful, session created.
+2025-06-15T16:01:49.151Z - --- END LOGIN ATTEMPT ---

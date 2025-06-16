@@ -1,0 +1,8 @@
+/* Custom styles can go here if needed, supplementing Tailwind */
+body {
+    font-family: 'Poppins', sans-serif; /* Example: Adding a custom font */
+}
+
+/* You might want to add custom styles for specific components 
+   that are harder to achieve with Tailwind utility classes alone,
+   or for very reusable custom components. */

@@ -1,0 +1,525 @@
+/* ---------------------------
+   Ileya Landing Page Styles
+----------------------------*/
+:root {
+  --clr-primary: #dc2626;
+  --clr-primary-dark: #b91c1c;
+  --clr-gray-100: #f7f9fc;
+  --clr-gray-200: #e9eef5;
+  --clr-gray-800: #263238;
+  --ff-sans: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--ff-sans);
+  color: var(--clr-gray-800);
+  background: #ffffff;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.container {
+  width: min(90%, 1200px);
+  margin-inline: auto;
+}
+
+/* ---------------------------
+   Navigation
+----------------------------*/
+.navbar {
+  position: fixed;
+  top: 0;
+  inset-inline: 0;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.04);
+}
+
+.nav-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: 1rem;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logo {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--clr-primary);
+  text-decoration: none;
+}
+.logo span { color: var(--clr-primary-dark); }
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--clr-gray-800);
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.nav-links a:hover { color: var(--clr-primary-dark); }
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.btn-primary {
+  background: var(--clr-primary);
+  color: #fff;
+  transition: background 0.2s ease;
+}
+.btn-primary:hover {
+  background: var(--clr-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--clr-gray-800);
+  border: 1px solid var(--clr-gray-200);
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background: var(--clr-primary);
+  color: #fff;
+  border-color: var(--clr-primary);
+}
+
+
+
+/* ---------------------------
+   Hero Section
+----------------------------*/
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-top: 80px; /* offset for sticky navbar */
+  background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url('img/ChatGPT Image Jun 14, 2025, 02_03_49 PM.png') center/cover no-repeat;
+  animation: pan-background 40s linear infinite;
+}
+
+.hero-content {
+  max-width: 750px;
+  color: #ffffff;
+}
+
+.hero h1 {
+  font-size: clamp(2.3rem, 5vw, 4rem);
+  line-height: 1.15;
+  margin-bottom: 1rem;
+}
+.hero h1 span { color: var(--clr-primary); }
+
+.hero p {
+  margin-bottom: 2rem;
+  color: #e5e7eb;
+}
+
+.search-card {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(17, 38, 146, 0.08);
+  display: grid;
+  gap: 1rem;
+  align-items: center;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.search-field {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--clr-gray-100);
+  padding: 0.7rem 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--clr-gray-200);
+  transition: border-color 0.2s ease;
+}
+
+.search-field:focus-within {
+  border-color: var(--clr-primary);
+}
+
+.search-field i {
+  color: var(--clr-gray-800);
+  font-size: 1.1rem;
+}
+
+.search-card input,
+.search-card select {
+  width: 100%;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-family: inherit;
+  font-size: 0.9rem;
+  color: var(--clr-gray-800);
+}
+
+/* Custom select arrow */
+.search-card select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23263238' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 2.5rem;
+}
+
+.search-card button {
+  padding-block: 0.8rem;
+}
+
+/* ---------------------------
+   Features Section
+----------------------------*/
+.features {
+  padding-block: 6rem 4rem;
+  background: var(--clr-gray-100);
+}
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.section-header h2 {
+  font-size: 2.3rem;
+  margin-bottom: 0.5rem;
+}
+
+.feature-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.feature-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(17, 38, 146, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.feature-card:hover { transform: translateY(-8px); }
+
+.feature-icon {
+  font-size: 2.5rem;
+  color: var(--clr-primary);
+  margin-bottom: 1rem;
+}
+
+/* ---------------------------
+   Listings Section
+----------------------------*/
+.listings {
+  padding-block: 6rem;
+}
+.listings-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.listing-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(17, 38, 146, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.listing-card:hover { transform: translateY(-6px); }
+
+.card-content {
+  padding: 1rem 1.25rem 1.5rem;
+}
+.card-content h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.25rem;
+}
+.price {
+  color: var(--clr-primary-dark);
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+/* ---------------------------
+   Agent Review Section
+----------------------------*/
+.agent-reviews {
+  padding-block: 6rem;
+  background: var(--clr-gray-100);
+}
+
+.agent-reviews-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.agent-reviews-content .section-header {
+  text-align: left;
+  margin-bottom: 2.5rem;
+}
+
+.agent-reviews-content .section-header p {
+  max-width: 45ch;
+}
+
+.agent-reviews-image img {
+  border-radius: 12px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  box-shadow: 0 8px 30px rgba(17, 38, 146, 0.08);
+}
+
+.review-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--clr-gray-200);
+  box-shadow: 0 4px 20px rgba(17, 38, 146, 0.03);
+}
+
+.review-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.agent-photo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.review-header h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+}
+
+.star-rating i {
+  color: #f59e0b;
+  font-size: 0.9rem;
+}
+
+.review-body {
+  font-style: italic;
+  color: var(--clr-gray-800);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+/* ---------------------------
+   How It Works
+----------------------------*/
+.how-it-works {
+  padding-block: 6rem;
+}
+
+.process-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2.5rem;
+  text-align: center;
+}
+
+.process-image {
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 8px 30px rgba(17, 38, 146, 0.08);
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.process-step h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--clr-primary);
+}
+
+
+/* ---------------------------
+   Testimonials
+----------------------------*/
+.testimonials {
+  padding-block: 6rem;
+  background: var(--clr-gray-100);
+}
+
+.testimonial-grid {
+  display: grid;
+  gap: 2.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.testimonial-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 2rem 1.75rem;
+  box-shadow: 0 4px 20px rgba(17, 38, 146, 0.05);
+  font-style: italic;
+}
+
+.testimonial-card h4 {
+  margin-top: 1rem;
+  font-style: normal;
+  color: var(--clr-primary);
+  font-weight: 600;
+}
+
+/* ---------------------------
+   Footer
+----------------------------*/
+footer {
+  background: #0a0f19;
+  color: #c0cad9;
+  padding-block: 3rem;
+}
+.footer-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-brand p {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+}
+.footer-brand .logo { color: #fff; }
+
+.footer-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.footer-links a {
+  text-decoration: none;
+  color: #c0cad9;
+  font-size: 0.9rem;
+  transition: color 0.2s ease;
+}
+.footer-links a:hover { color: #fff; }
+
+/* ---------------------------
+   Animations
+----------------------------*/
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.4);
+  }
+  70% {
+    transform: scale(1.02);
+    box-shadow: 0 0 0 10px rgba(220, 38, 38, 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(220, 38, 38, 0);
+  }
+}
+
+@keyframes pan-background {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+.fade-up { opacity: 0; transform: translateY(30px); }
+.reveal { opacity: 0; transform: translateY(40px); }
+
+.fade-delay { transition-delay: 0.15s; }
+.fade-delay-2 { transition-delay: 0.3s; }
+
+/* When visible (added by JS) */
+.active { opacity: 1 !important; transform: translateY(0) !important; transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
+
+/* ---------------------------
+   Responsive
+----------------------------*/
+@media (max-width: 992px) {
+  .agent-reviews-wrapper {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .agent-reviews-image {
+    order: -1;
+    margin-bottom: 2rem;
+  }
+  .agent-reviews-content .section-header {
+    text-align: center;
+  }
+  .agent-reviews-content .section-header p {
+    margin-inline: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .search-card {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .nav-links {
+    display: none;
+  }
+  .search-card {
+    grid-template-columns: 1fr;
+  }
+  .hero-content {
+    width: 100%;
+  }
+}

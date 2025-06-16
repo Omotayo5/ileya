@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Users - Ileya Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="bg-gray-100">
+
+    <!-- Admin Navigation -->
+    <nav class="bg-red-700 text-white p-4 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="admin_dashboard.html" class="text-2xl font-bold hover:text-red-200 transition-colors">Ileya Admin</a>
+            <div class="space-x-1">
+                <a href="admin_dashboard.html" class="px-4 py-2 rounded-md hover:bg-red-600 transition-colors">Dashboard</a>
+                <a href="admin_users.html" class="px-4 py-2 rounded-md hover:bg-red-600 transition-colors font-semibold">Users</a>
+                <a href="admin_properties.html" class="px-4 py-2 rounded-md hover:bg-red-600 transition-colors">Properties</a>
+                <a href="admin_settings.html" class="px-4 py-2 rounded-md hover:bg-red-600 transition-colors">Settings</a>
+                <a href="admin_login.html" class="px-4 py-2 rounded-md hover:bg-red-600 transition-colors">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Admin Content -->
+    <div class="container mx-auto mt-8 p-4">
+        <h1 class="text-3xl font-semibold text-gray-800 mb-6">Manage Users</h1>
+
+        <!-- User Management Table -->
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-semibold text-gray-700">All Registered Users</h2>
+                <button class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md shadow-sm transition-colors">
+                    Add New User
+                </button>
+            </div>
+
+            <!-- Search/Filter (Placeholder) -->
+            <div class="mb-4">
+                <input type="text" placeholder="Search users (e.g., name, email, status)..." class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm">
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">User ID</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date Registered</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Listings</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <!-- Sample Row 1 -->
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">U001</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Alice Wonderland</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">alice@example.com</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2024-03-15</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">3</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                    Active
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                <a href="admin_view_user_details.html?id=U001" class="bg-blue-500 hover:bg-blue-600 text-white text-xs font-medium py-1 px-3 rounded-md shadow-sm transition-colors mr-3">View</a>
+                                <a href="#" onclick="toggleUserStatus(this, 'U001', 'Active')" class="bg-red-600 hover:bg-red-700 text-white text-xs font-medium py-1 px-3 rounded-md shadow-sm transition-colors">Suspend</a>
+                            </td>
+                        </tr>
+                        <!-- Sample Row 2 -->
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">U002</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Bob The Builder</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">bob@example.com</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2024-04-01</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">0</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+                                    Suspended
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                <a href="admin_view_user_details.html?id=U002" class="bg-blue-500 hover:bg-blue-600 text-white text-xs font-medium py-1 px-3 rounded-md shadow-sm transition-colors mr-3">View</a>
+                                <a href="#" onclick="toggleUserStatus(this, 'U002', 'Suspended')" class="bg-green-500 hover:bg-green-600 text-white text-xs font-medium py-1 px-3 rounded-md shadow-sm transition-colors">Activate</a>
+                            </td>
+                        </tr>
+                        <!-- More rows can be added dynamically -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination (Placeholder) -->
+            <div class="mt-4 flex items-center justify-between">
+                <p class="text-sm text-gray-700">
+                    Showing <span class="font-medium">1</span> to <span class="font-medium">2</span> of <span class="font-medium">2</span> results
+                </p>
+                <div class="flex-1 flex justify-between sm:justify-end">
+                    <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-red-50 hover:text-red-700 transition-colors">
+                        Previous
+                    </a>
+                    <a href="#" class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-red-50 hover:text-red-700 transition-colors">
+                        Next
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/main.js"></script>
+<script>
+    function toggleUserStatus(buttonElement, userId, currentStatus) {
+        const action = currentStatus === 'Active' ? 'suspend' : 'activate';
+        const newStatus = currentStatus === 'Active' ? 'Suspended' : 'Active';
+        const confirmationMessage = `Are you sure you want to ${action} user ${userId}?`;
+
+        if (confirm(confirmationMessage)) {
+            // Find the row and status cell
+            const row = buttonElement.closest('tr');
+            const statusCell = row.querySelector('td:nth-child(6) span'); // 6th column is Status
+
+            if (newStatus === 'Active') {
+                statusCell.textContent = 'Active';
+                statusCell.classList.remove('bg-red-100', 'text-red-800');
+                statusCell.classList.add('bg-green-100', 'text-green-800');
+                buttonElement.textContent = 'Suspend';
+                buttonElement.classList.remove('text-green-600', 'hover:text-green-900');
+                buttonElement.classList.add('text-red-600', 'hover:text-red-900');
+                // Update the onclick to reflect the new state
+                buttonElement.setAttribute('onclick', `toggleUserStatus(this, '${userId}', 'Active')`);
+            } else {
+                statusCell.textContent = 'Suspended';
+                statusCell.classList.remove('bg-green-100', 'text-green-800');
+                statusCell.classList.add('bg-red-100', 'text-red-800');
+                buttonElement.textContent = 'Activate';
+                buttonElement.classList.remove('text-red-600', 'hover:text-red-900');
+                buttonElement.classList.add('text-green-600', 'hover:text-green-900');
+                // Update the onclick to reflect the new state
+                buttonElement.setAttribute('onclick', `toggleUserStatus(this, '${userId}', 'Suspended')`);
+            }
+            console.log(`User ${userId} status changed to ${newStatus}`);
+            // In a real application, you would send this update to the backend.
+        }
+    }
+</script>
+</body>
+</html>

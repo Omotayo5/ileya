@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Rentals - Ileya</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-gray-100 text-gray-800">
+    <!-- Header -->
+    <header class="bg-white shadow-md">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-red-600">Ileya</a>
+            <!-- Mobile menu button -->
+            <div class="md:hidden">
+                <button id="mobile-menu-button" type="button" class="text-gray-600 hover:text-red-600 focus:outline-none focus:text-red-600">
+                    <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-4 items-center">
+                <a href="index.html" class="text-gray-600 hover:text-red-600">Home</a>
+                <a href="public-properties.html" class="text-red-600 font-semibold">Rentals</a>
+                <a href="index.html#contact" class="text-gray-600 hover:text-red-600">Contact</a>
+                <a href="ileya-app/login.html" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">Login</a>
+                <a href="ileya-app/register.html" class="text-red-600 border border-red-600 px-4 py-2 rounded hover:bg-red-600 hover:text-white">Sign Up</a>
+            </div>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white shadow-lg">
+            <a href="index.html" class="block py-2 px-6 text-gray-700 hover:bg-gray-100 hover:text-red-600">Home</a>
+            <a href="public-properties.html" class="block py-2 px-6 text-red-600 hover:bg-gray-100 font-semibold">Rentals</a>
+            <a href="index.html#contact" class="block py-2 px-6 text-gray-700 hover:bg-gray-100 hover:text-red-600">Contact</a>
+            <a href="ileya-app/login.html" class="block py-2 px-6 text-gray-700 hover:bg-gray-100 hover:text-red-600">Login</a>
+            <a href="ileya-app/register.html" class="block py-2 px-6 text-gray-700 hover:bg-gray-100 hover:text-red-600">Sign Up</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-12">
+        <h1 class="text-3xl font-bold mb-8 text-center">All Rental Properties</h1>
+        
+        <!-- Search and Filter Bar (Placeholder) -->
+        <div class="mb-8 p-4 bg-white rounded-lg shadow">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <input type="text" placeholder="Keywords (e.g., Duplex, Lekki)" class="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500">
+                <select class="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500">
+                    <option value="">Property Type</option>
+                    <option value="apartment">Apartment</option>
+                    <option value="house">House</option>
+                    <option value="duplex">Duplex</option>
+                    <option value="room">Room</option>
+                </select>
+                <input type="number" placeholder="Max Price (NGN/Year)" class="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500">
+                <button class="bg-red-600 text-white p-2 rounded-md hover:bg-red-700">Search</button>
+            </div>
+        </div>
+
+        <!-- Property Listing Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Placeholder Property Card 1 -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
+                <a href="ileya-app/login.html"> 
+                    <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8cmVhbCUyMGVzdGF0ZSUyMGhvdXNlfGVufDB8fDB8fHww&auto=format&fit=crop&w=400&q=60" alt="Property Image" class="w-full h-56 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800">Spacious 4-Bedroom Duplex</h3>
+                        <p class="text-red-600 font-bold text-lg mb-2">₦4,500,000/year</p>
+                        <p class="text-gray-600 mb-1 flex items-center">
+                            <svg class="w-4 h-4 mr-1 text-gray-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path></svg>
+                            Chevron Drive, Lekki, Lagos
+                        </p>
+                        <div class="mt-3 pt-3 border-t border-gray-200 text-xs text-gray-500">
+                            <span>4 Beds</span> &bull; <span>3 Baths</span> &bull; <span>Serviced</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <!-- Placeholder Property Card 2 -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
+                <a href="ileya-app/login.html">
+                    <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmVhbCUyMGVzdGF0ZSUyMGFwYXJ0bWVudHxlbnwwfHwwfHx8MA&auto=format&fit=crop&w=400&q=60" alt="Property Image" class="w-full h-56 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800">Modern 2-Bedroom Apartment</h3>
+                        <p class="text-red-600 font-bold text-lg mb-2">₦1,800,000/year</p>
+                        <p class="text-gray-600 mb-1 flex items-center">
+                            <svg class="w-4 h-4 mr-1 text-gray-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path></svg>
+                            Off Allen Avenue, Ikeja, Lagos
+                        </p>
+                        <div class="mt-3 pt-3 border-t border-gray-200 text-xs text-gray-500">
+                            <span>2 Beds</span> &bull; <span>2 Baths</span> &bull; <span>POP Ceiling</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <!-- Placeholder Property Card 3 -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
+                <a href="ileya-app/login.html">
+                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8cmVhbCUyMGVzdGF0ZSUyMGhvdXNlfGVufDB8fDB8fHww&auto=format&fit=crop&w=400&q=60" alt="Property Image" class="w-full h-56 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 text-gray-800">Self-Contained Room</h3>
+                        <p class="text-red-600 font-bold text-lg mb-2">₦650,000/year</p>
+                        <p class="text-gray-600 mb-1 flex items-center">
+                            <svg class="w-4 h-4 mr-1 text-gray-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path></svg>
+                            Yaba, Lagos
+                        </p>
+                        <div class="mt-3 pt-3 border-t border-gray-200 text-xs text-gray-500">
+                            <span>1 Room</span> &bull; <span>1 Bath</span> &bull; <span>Shared Kitchen</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <!-- Add more placeholder cards as needed -->
+        </div>
+
+        <!-- Pagination (Placeholder) -->
+        
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12 mt-16">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; <span id="currentYear"></span> Ileya. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="js/main.js"></script>
+    <script>document.getElementById('currentYear').textContent = new Date().getFullYear();</script>
+</body>
+</html>

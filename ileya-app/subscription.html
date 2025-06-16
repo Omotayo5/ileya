@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ileya Subscription Plans</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #dc2626;
+            --dark-color: #1a202c;
+            --gray-color: #718096;
+            --light-gray-color: #f7fafc;
+            --white-color: #ffffff;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light-gray-color);
+            margin: 0;
+            padding: 40px 20px;
+            color: var(--dark-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            text-align: center;
+        }
+
+        .pricing-header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .pricing-header p {
+            font-size: 18px;
+            color: var(--gray-color);
+            margin-bottom: 50px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            justify-content: center;
+        }
+
+        .plan {
+            background-color: var(--white-color);
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+
+        .plan:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .plan.popular {
+            border-color: var(--primary-color);
+            transform: scale(1.05);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: 15px;
+            right: -45px;
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            padding: 8px 40px;
+            font-size: 14px;
+            font-weight: 600;
+            transform: rotate(45deg);
+        }
+
+        .plan-name {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .plan-price {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .plan-price span {
+            font-size: 16px;
+            font-weight: 400;
+            color: var(--gray-color);
+        }
+
+        .plan-features {
+            list-style: none;
+            padding: 0;
+            margin: 30px 0;
+        }
+
+        .plan-features li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .plan-features li svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            color: var(--primary-color);
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+        }
+
+        .btn-primary:hover {
+            background-color: #b32020;
+        }
+
+        .btn-secondary {
+            background-color: var(--white-color);
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--light-gray-color);
+        }
+
+        .footer {
+            margin-top: 50px;
+            font-size: 14px;
+            color: var(--gray-color);
+        }
+
+        .footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="pricing-header">
+            <h1>Our Premium Plan</h1>
+            <p>Get access to exclusive features and browse unlimited verified listings with our premium plan.</p>
+        </div>
+
+        <div class="pricing-grid" style="grid-template-columns: 1fr; max-width: 400px; margin: 0 auto;">
+            <!-- Single Popular Plan -->
+            <div class="plan popular">
+                <div class="popular-badge">Popular</div>
+                <h2 class="plan-name">Premium Access</h2>
+                <div class="plan-price">₦499.99<span>/month</span></div>
+                <ul class="plan-features">
+                    <li><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Unlimited Property Access</li>
+                    <li><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Browse Verified Listings</li>
+                    <li><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Priority Renter Support</li>
+                    <li><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Cancel Anytime</li>
+                </ul>
+                <a href="#" id="subscribeBtn" class="btn btn-primary">Subscribe Now</a>
+                <p id="subscribeStatus" style="margin-top:10px;font-size:14px;color:var(--gray-color);"></p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Need to manage your listings? <a href="/user-dashboard.html">Return to Dashboard</a></p>
+        </div>
+    </div>
+<script src="https://checkout.flutterwave.com/v3.js"></script>
+<script>
+// --- Handle subscription purchase with Flutterwave ---
+const btn = document.getElementById('subscribeBtn');
+const statusEl = document.getElementById('subscribeStatus');
+
+btn?.addEventListener('click', async (e) => {
+    e.preventDefault();
+    btn.disabled = true;
+    statusEl.textContent = 'Processing...';
+
+    try {
+        // 1) Create/ensure an inactive subscription row on the backend
+        const res = await fetch('/api/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' }
+        });
+        const data = await res.json();
+        statusEl.textContent = data.message || (res.ok ? 'Subscription created.' : 'Unable to subscribe');
+        if (!res.ok) {
+            btn.disabled = false;
+            return;
+        }
+
+        // 2) Get user profile (for email) – fallback to prompt if not available
+        let email = '';
+        try {
+            const pRes = await fetch('/api/profile', { credentials: 'include' });
+            if (pRes.ok) {
+                const pData = await pRes.json();
+                email = pData.user?.email || '';
+            }
+        } catch {}
+        if (!email) {
+            email = prompt('Enter your email for payment receipt');
+            if (!email) {
+                statusEl.textContent = 'Email is required for payment.';
+                btn.disabled = false;
+                return;
+            }
+        }
+
+        // 3) Initialise Flutterwave Inline Checkout
+        const txRef = 'ILEYA_'+Date.now();
+        FlutterwaveCheckout({
+            public_key: 'FLWPUBK_TEST-abc2a4c4fa2638dfeb444961fb2ab8b7-X', // TODO: replace with your real public key in .env and inject via template engine
+            tx_ref: txRef,
+            amount: 499.99,
+            currency: 'NGN',
+            payment_options: 'card,ussd,banktransfer',
+            customer: {
+                email,
+            },
+            customizations: {
+                title: 'Ileya Premium Access',
+                description: '30-day premium access subscription',
+                logo: 'Img/ileya_logo-removebg-preview (1).png',
+            },
+            callback: async function(data) {
+                // Successful charge – call backend to confirm & activate
+                try {
+                    const confirmRes = await fetch('/api/payment/confirm', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ transaction_id: data.transaction_id, tx_ref: data.tx_ref })
+                    });
+                    const confirmData = await confirmRes.json();
+                    if (confirmRes.ok && confirmData.success) {
+                        window.location.href = '/dashboard.html';
+                    } else {
+                        statusEl.textContent = 'Payment captured but activation failed. Contact support.';
+                        btn.disabled = false;
+                    }
+                } catch (err) {
+                    console.error(err);
+                    statusEl.textContent = 'Could not verify payment. Please contact support.';
+                    btn.disabled = false;
+                }
+            },
+            onclose: function() {
+                statusEl.textContent = 'Payment cancelled.';
+                btn.disabled = false;
+            }
+        });
+    } catch (err) {
+        console.error(err);
+        statusEl.textContent = 'Network error. Please try again.';
+        btn.disabled = false;
+    }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard - Ileya</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="bg-gray-50 font-sans">
+
+    <div x-data="{ sidebarOpen: false }">
+        <!-- Sidebar -->
+        <aside
+            class="fixed inset-y-0 left-0 z-40 w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out md:translate-x-0"
+            :class="{'-translate-x-full': !sidebarOpen, 'translate-x-0': sidebarOpen}">
+            <div class="flex items-center justify-center h-20 border-b">
+                <a href="member-properties.html" class="text-3xl font-bold text-red-700">Ileya</a>
+            </div>
+            <nav class="mt-4">
+                <a href="user-dashboard.html" class="flex items-center px-6 py-3 text-red-700 bg-red-50">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                    <span class="ml-3">Overview</span>
+                </a>
+                <a href="member-properties.html" class="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-100">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"></path></svg>
+                    <span class="ml-3">Marketplace</span>
+                </a>
+                <a href="my-rentals.html" class="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-100">
+                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path></svg>
+                    <span class="ml-3">My Rentals</span>
+                </a>
+                <a href="user-profile.html" class="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-100">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                    <span class="ml-3">My Profile</span>
+                </a>
+                 <a href="login.html" class="flex items-center px-6 py-3 text-gray-600 hover:bg-gray-100">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                    <span class="ml-3">Logout</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main content -->
+        <div class="md:ml-64 flex flex-col flex-1">
+            <!-- Header -->
+            <header class="flex items-center justify-between h-20 px-6 bg-white border-b md:justify-end">
+                <button @click="sidebarOpen = !sidebarOpen" class="md:hidden text-gray-600 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+                <div class="flex items-center">
+                    <a href="create-rental.html" class="flex items-center justify-center h-10 px-4 ml-auto text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700">
+                        <svg class="w-5 h-5 mr-2 -ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
+                        List a Property
+                    </a>
+                </div>
+            </header>
+
+            <main class="flex-1 p-6">
+                <div class="mb-8">
+                    <h1 class="text-3xl font-bold text-gray-900">Welcome back, User!</h1>
+                    <p class="text-gray-600 mt-1">Here's an overview of your rental listings.</p>
+                </div>
+
+                <!-- Stats Overview -->
+                <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-4 mb-8">
+                    <div class="p-6 bg-white rounded-xl shadow-md">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0 p-3 bg-red-100 rounded-lg">
+                                <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-sm text-gray-500">Active Rentals</p>
+                                <p id="active-rentals-count" class="text-2xl font-bold text-gray-900">0</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6 bg-white rounded-xl shadow-md">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0 p-3 bg-blue-100 rounded-lg">
+                                <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" /></svg>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-sm text-gray-500">Subscription Status</p>
+                                <p id="subscription-status" class="text-2xl font-bold text-gray-900 capitalize">Checking...</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6 bg-white rounded-xl shadow-md">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0 p-3 bg-green-100 rounded-lg">
+                                <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-sm text-gray-500">Expires On</p>
+                                <p id="subscription-expiry" class="text-2xl font-bold text-gray-900">--</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="p-6 bg-white rounded-xl shadow-md">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0 p-3 bg-gray-100 rounded-lg">
+                                <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-sm text-gray-500">Deleted Rentals</p>
+                                <p id="deleted-rentals-count" class="text-2xl font-bold text-gray-900">0</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- My Rental Listings -->
+                <div class="bg-white p-6 rounded-xl shadow-md">
+                    <div class="flex flex-wrap justify-between items-center gap-4 mb-6">
+                        <h2 class="text-xl font-bold text-gray-800">Recent Listings</h2>
+                        <a href="my-rentals.html" class="text-sm font-medium text-red-600 hover:text-red-800">
+                            View All &rarr;
+                        </a>
+                    </div>
+                    <div id="dashboard-rentals-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                        <!-- Rental previews will be dynamically inserted here -->
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="fixed top-5 right-5 z-50"></div>
+
+    <script src="js/main.js"></script>
+    <script>
+        // --- Toast Notification Logic ---
+        function showToast(message, type = 'success', duration = 5000) {
+            const container = document.getElementById('toast-container');
+            if (!container) return;
+
+            const toastId = 'toast-' + Date.now();
+            const toast = document.createElement('div');
+            toast.id = toastId;
+            toast.className = `flex items-center w-full max-w-xs p-4 mb-4 text-gray-600 bg-white rounded-xl shadow-lg transform transition-all duration-300 ease-in-out translate-x-full`;
+            toast.setAttribute('role', 'alert');
+
+            let iconHtml = '';
+            let colorClasses = '';
+
+            if (type === 'success') {
+                colorClasses = 'text-green-500 bg-green-100';
+                iconHtml = `<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>`;
+            } else if (type === 'error') {
+                colorClasses = 'text-red-500 bg-red-100';
+                iconHtml = `<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path></svg>`;
+            }
+
+            toast.innerHTML = `
+                <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 ${colorClasses} rounded-lg">
+                    ${iconHtml}
+                </div>
+                <div class="ml-3 text-sm font-normal">${message}</div>
+                <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex h-8 w-8" aria-label="Close">
+                    <span class="sr-only">Close</span>
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                </button>
+            `;
+
+            container.appendChild(toast);
+
+            setTimeout(() => { toast.classList.remove('translate-x-full'); }, 10);
+
+            const closeButton = toast.querySelector('button');
+            const closeToast = () => {
+                toast.classList.add('translate-x-full');
+                setTimeout(() => { if (toast.parentNode) { toast.remove(); } }, 300);
+            };
+
+            closeButton.addEventListener('click', closeToast);
+            setTimeout(closeToast, duration);
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            const grid = document.getElementById('dashboard-rentals-grid');
+            const welcomeMessage = document.querySelector('h1');
+            const activeRentalsCountEl = document.getElementById('active-rentals-count');
+            const deletedRentalsCountEl = document.getElementById('deleted-rentals-count');
+            const subStatusEl = document.getElementById('subscription-status');
+            const propertiesCard = document.getElementById('properties-card');
+            const listerCard = document.getElementById('lister-card');
+            const subExpiryEl = document.getElementById('subscription-expiry');
+            
+
+            const noRentalsHTML = `
+                <div class="col-span-full text-center py-10 px-4">
+                    <svg class="mx-auto h-12 w-12 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path></svg>
+                    <h3 class="mt-2 text-md font-medium text-gray-800">No rental properties yet.</h3>
+                    <p class="mt-1 text-sm text-gray-500">Ready to list your first property?</p>
+                    <a href="create-rental.html" class="mt-6 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-red-600 hover:bg-red-700">
+                        Add New Property
+                    </a>
+                </div>`;
+
+            // Fetch user profile and stats
+            try {
+                const profileResponse = await fetch('/api/profile', { credentials: 'include' });
+
+                if (profileResponse.status === 401) {
+                    window.location.href = 'login.html';
+                    return;
+                }
+
+                if (profileResponse.ok) {
+                    const profileData = await profileResponse.json();
+                    if (profileData.success) {
+                        const user = profileData.user;
+                        if (user.fullName) {
+                            welcomeMessage.textContent = `Welcome back, ${user.fullName.split(' ')[0]}!`;
+                        }
+                        if (user.rentalStats) {
+                            activeRentalsCountEl.textContent = user.rentalStats.active || 0;
+                            deletedRentalsCountEl.textContent = user.rentalStats.deleted || 0;
+                        }
+                    } else {
+                        showToast(profileData.message || 'Could not load profile data.', 'error');
+                    }
+                } else {
+                    showToast('Could not load your profile.', 'error');
+                }
+            } catch (e) {
+                console.error("Could not fetch user profile.", e);
+                showToast('An error occurred while loading your profile.', 'error');
+            }
+
+            // Fetch subscription details
+            try {
+                const subResponse = await fetch('/api/subscription-details', { credentials: 'include' });
+                if (subResponse.ok) {
+                    const subData = await subResponse.json();
+                    if (subData.success) {
+                        const { plan_name, status, end_date } = subData.details;
+
+                        if (status === 'active') {
+                            // Active subscription
+                            subStatusEl.innerText = 'active';
+                            subExpiryEl.textContent = end_date ? new Date(end_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'N/A';
+                            
+                            if (propertiesCard) propertiesCard.style.display = 'block';
+                            if (listerCard) listerCard.style.display = 'block';
+
+                            subStatusEl.classList.remove('text-red-600');
+                            subStatusEl.classList.add('text-green-600');
+                        } else {
+                            // Inactive, expired, or any other status
+                            subStatusEl.innerText = 'inactive';
+                            subExpiryEl.textContent = 'N/A';
+
+                            if (propertiesCard) propertiesCard.style.display = 'none';
+                            if (listerCard) listerCard.style.display = 'none';
+
+                            subStatusEl.classList.remove('text-green-600');
+                            subStatusEl.classList.add('text-red-600');
+                        }
+                    } else {
+                        subStatusEl.textContent = 'N/A';
+                        subExpiryEl.textContent = 'N/A';
+                    }
+                } else if (subResponse.status === 404) {
+                    subStatusEl.textContent = 'None';
+                    subExpiryEl.textContent = 'N/A';
+                } else {
+                    subStatusEl.textContent = 'Error';
+                    
+                    subExpiryEl.textContent = 'Error';
+                }
+            } catch (e) {
+                console.error('Could not fetch subscription details', e);
+                subStatusEl.textContent = 'Error';
+            }
+
+            // Fetch recent active rental listings for the grid
+            try {
+                const rentalsResponse = await fetch('/api/rentals/my-rentals', { credentials: 'include' });
+                const rentalsData = await rentalsResponse.json();
+
+                if (rentalsData.success && rentalsData.rentals.length > 0) {
+                    grid.innerHTML = ''; // Clear placeholders
+                    rentalsData.rentals.slice(0, 3).forEach(rental => { // Show only first 3
+                        const rentalCard = `
+                            <div class="bg-white rounded-xl shadow-md overflow-hidden transform hover:-translate-y-1 transition-transform duration-300">
+                                <a href="property-details.html?id=${rental.id}" class="block">
+                                    <img src="${rental.photos && rental.photos.length > 0 ? '/uploads/rentals/' + rental.photos[0] : 'https://via.placeholder.com/400x300.png?text=No+Image'}" alt="${rental.title}" class="w-full h-40 object-cover">
+                                </a>
+                                <div class="p-4">
+                                    <h3 class="font-semibold text-gray-800 truncate">${rental.title}</h3>
+                                    <p class="text-sm text-gray-500 mt-1">${rental.city}, ${rental.state}</p>
+                                    <p class="text-lg font-bold text-red-700 mt-2">₦${new Intl.NumberFormat().format(rental.rental_price)}<span class="text-xs font-medium text-gray-500">/year</span></p>
+                                </div>
+                            </div>
+                        `;
+                        grid.innerHTML += rentalCard;
+                    });
+                } else {
+                    grid.innerHTML = noRentalsHTML;
+                }
+            } catch (error) {
+                console.error('Failed to fetch your rentals:', error);
+                showToast('Could not load your properties.', 'error');
+                grid.innerHTML = noRentalsHTML;
+            }
+        });
+    </script>
+</body>
+</html>

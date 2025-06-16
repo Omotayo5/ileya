@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Settings - Ileya Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="bg-gray-100">
+
+    <!-- Admin Navigation -->
+    <nav class="bg-red-700 text-white p-4 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="admin_dashboard.html" class="text-2xl font-bold hover:text-red-200 transition-colors">Ileya Admin</a>
+            <div class="space-x-1">
+                <a href="admin_dashboard.html" class="px-4 py-2 rounded-md hover:bg-red-600 transition-colors">Dashboard</a>
+                <a href="admin_users.html" class="px-4 py-2 rounded-md hover:bg-red-600 transition-colors">Users</a>
+                <a href="admin_properties.html" class="px-4 py-2 rounded-md hover:bg-red-600 transition-colors">Properties</a>
+                <a href="admin_settings.html" class="px-4 py-2 rounded-md hover:bg-red-600 transition-colors font-semibold">Settings</a>
+                <a href="admin_login.html" class="px-4 py-2 rounded-md hover:bg-red-600 transition-colors">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Admin Content -->
+    <div class="container mx-auto mt-8 p-4">
+        <h1 class="text-3xl font-semibold text-gray-800 mb-6">Admin Settings</h1>
+
+        <form id="settingsForm">
+            <!-- Rental Management Settings (Retained) -->
+            <div class="bg-white p-6 rounded-lg shadow-md mb-6">
+                <h2 class="text-xl font-semibold text-gray-700 mb-4 border-b pb-2">Rental Management Settings</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
+                    <div>
+                        <label for="defaultListingDuration" class="block text-sm font-medium text-gray-700">Default Listing Duration (days)</label>
+                        <input type="number" name="defaultListingDuration" id="defaultListingDuration" value="30" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm">
+                    </div>
+                    <div>
+                        <label for="maxImagesPerListing" class="block text-sm font-medium text-gray-700">Maximum Images per Listing</label>
+                        <input type="number" name="maxImagesPerListing" id="maxImagesPerListing" value="10" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm">
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Admin Users & Permissions -->
+            <div class="bg-white p-6 rounded-lg shadow-md mb-6">
+                <div class="flex justify-between items-center mb-4 border-b pb-2">
+                    <h2 class="text-xl font-semibold text-gray-700">Admin Users & Permissions</h2>
+                    <button type="button" onclick="openAddAdminModal()" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-md shadow-sm transition-colors">
+                        Add New Admin User
+                    </button>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">User ID</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Role</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <!-- Sample Admin User Row 1 -->
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">ADM001</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Main Admin</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">mainadmin@ileya.com</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Super Admin</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Active</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                    <a href="#" onclick="openEditPermissionsModal('ADM001', 'Main Admin', 'Super Admin')" class="bg-blue-500 hover:bg-blue-600 text-white text-xs font-medium py-1 px-3 rounded-md shadow-sm transition-colors mr-3">Permissions</a>
+                                    <a href="#" onclick="alert('Cannot change status of Super Admin')" class="text-gray-400 cursor-not-allowed">Change Status</a>
+                                </td>
+                            </tr>
+                            <!-- Sample Admin User Row 2 -->
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">ADM002</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Bola Ahmed</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">bola.ahmed@ileya.com</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Customer Care</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Active</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                    <a href="#" onclick="openEditPermissionsModal('ADM002', 'Bola Ahmed', 'Customer Care')" class="bg-blue-500 hover:bg-blue-600 text-white text-xs font-medium py-1 px-3 rounded-md shadow-sm transition-colors mr-3">Permissions</a>
+                                    <a href="#" onclick="toggleAdminStatus(this, 'ADM002', 'Active')" class="bg-red-600 hover:bg-red-700 text-white text-xs font-medium py-1 px-3 rounded-md shadow-sm transition-colors">Deactivate</a>
+                                </td>
+                            </tr>
+                            <!-- Sample Admin User Row 3 -->
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">ADM003</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Chinedu Obi</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">chinedu.obi@ileya.com</td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Accountant</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">Inactive</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                    <a href="#" onclick="openEditPermissionsModal('ADM003', 'Chinedu Obi', 'Accountant')" class="bg-blue-500 hover:bg-blue-600 text-white text-xs font-medium py-1 px-3 rounded-md shadow-sm transition-colors mr-3">Permissions</a>
+                                    <a href="#" onclick="toggleAdminStatus(this, 'ADM003', 'Inactive')" class="bg-green-500 hover:bg-green-600 text-white text-xs font-medium py-1 px-3 rounded-md shadow-sm transition-colors">Activate</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Save Button -->
+            <div class="flex justify-end">
+                <button type="button" onclick="alert('Settings saved (simulation).')" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-6 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                    Save Settings
+                </button>
+            </div>
+        </form>
+
+    <!-- Add Admin User Modal -->
+    <div id="addAdminModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center" style="display: none;">
+        <div class="relative mx-auto p-5 border w-full max-w-md shadow-lg rounded-md bg-white">
+            <div class="mt-3 text-center">
+                <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">Add New Admin User</h3>
+                <form id="addAdminForm" class="space-y-4">
+                    <div>
+                        <label for="adminName" class="block text-sm font-medium text-gray-700 text-left">Full Name</label>
+                        <input type="text" name="adminName" id="adminName" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm">
+                    </div>
+                    <div>
+                        <label for="adminEmail" class="block text-sm font-medium text-gray-700 text-left">Email Address</label>
+                        <input type="email" name="adminEmail" id="adminEmail" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm">
+                    </div>
+                    <div>
+                        <label for="adminRole" class="block text-sm font-medium text-gray-700 text-left">Role</label>
+                        <select id="adminRole" name="adminRole" required class="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm">
+                            <option value="Customer Care">Customer Care</option>
+                            <option value="Accountant">Accountant</option>
+                            <option value="Super Admin">Super Admin</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="adminPassword" class="block text-sm font-medium text-gray-700 text-left">Password</label>
+                        <input type="password" name="adminPassword" id="adminPassword" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm">
+                    </div>
+                    <div class="items-center px-4 py-3 space-x-4">
+                        <button id="saveAdminButton" type="button" onclick="saveAdminUser()" class="px-4 py-2 bg-red-600 text-white text-base font-medium rounded-md w-auto hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-300">
+                            Save Admin User
+                        </button>
+                        <button type="button" onclick="closeAddAdminModal()" class="px-4 py-2 bg-gray-300 text-gray-700 text-base font-medium rounded-md w-auto hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-300">
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+    <script src="../js/main.js"></script>
+
+    <!-- Edit Permissions Modal -->
+    <div id="editPermissionsModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center" style="display: none;">
+        <div class="relative mx-auto p-5 border w-full max-w-lg shadow-lg rounded-md bg-white">
+            <div class="mt-3">
+                <h3 class="text-lg leading-6 font-medium text-gray-900 mb-1 text-center">Edit Permissions</h3>
+                <p class="text-sm text-gray-600 mb-4 text-center">For: <span id="permAdminName" class="font-semibold"></span> (<span id="permAdminId" class="font-semibold"></span>) - Role: <span id="permAdminRole" class="font-semibold"></span></p>
+                <form id="editPermissionsForm" class="space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" id="permManageUsers" name="permissions" value="manage_users" class="form-checkbox h-5 w-5 text-red-600 focus:ring-red-500">
+                                <span class="text-gray-700">Manage Platform Users</span>
+                            </label>
+                        </div>
+                        <div>
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" id="permManageProperties" name="permissions" value="manage_properties" class="form-checkbox h-5 w-5 text-red-600 focus:ring-red-500">
+                                <span class="text-gray-700">Manage Properties</span>
+                            </label>
+                        </div>
+                        <div>
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" id="permManageSettings" name="permissions" value="manage_settings" class="form-checkbox h-5 w-5 text-red-600 focus:ring-red-500">
+                                <span class="text-gray-700">Manage Site Settings</span>
+                            </label>
+                        </div>
+                        <div>
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" id="permManageAdmins" name="permissions" value="manage_admins" class="form-checkbox h-5 w-5 text-red-600 focus:ring-red-500">
+                                <span class="text-gray-700">Manage Admin Access</span>
+                            </label>
+                        </div>
+                        <div>
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" id="permViewReports" name="permissions" value="view_reports" class="form-checkbox h-5 w-5 text-red-600 focus:ring-red-500">
+                                <span class="text-gray-700">View Financial Reports</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="items-center px-4 py-3 space-x-4 text-center">
+                        <button type="button" onclick="savePermissions()" class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-base font-medium rounded-md w-auto hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-300">
+                            Save Changes
+                        </button>
+                        <button type="button" onclick="closeEditPermissionsModal()" class="px-4 py-2 bg-gray-300 text-gray-700 text-base font-medium rounded-md w-auto hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-300">
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+<script>
+    function openAddAdminModal() {
+        document.getElementById('addAdminModal').style.display = 'flex';
+    }
+
+    function closeAddAdminModal() {
+        document.getElementById('addAdminModal').style.display = 'none';
+        document.getElementById('addAdminForm').reset(); // Reset form fields
+    }
+
+    function saveAdminUser() {
+        // Basic validation (can be expanded)
+        const name = document.getElementById('adminName').value;
+        const email = document.getElementById('adminEmail').value;
+        const role = document.getElementById('adminRole').value;
+        const password = document.getElementById('adminPassword').value;
+        if (!name || !email || !role || !password) {
+            alert('Please fill in all fields.');
+            return;
+        }
+        alert(`Simulating: Admin User Saved!\nName: ${name}\nEmail: ${email}\nRole: ${role}`);
+        // In a real app, you'd send this data to a backend and then update the table.
+        closeAddAdminModal();
+    }
+
+    function toggleAdminStatus(buttonElement, adminId, currentStatus) {
+        if (adminId === 'ADM001') { // Super Admin status cannot be changed via this button
+            alert('Status of Super Admin cannot be changed here.');
+            return;
+        }
+
+        const action = currentStatus === 'Active' ? 'deactivate' : 'activate';
+        const newStatus = currentStatus === 'Active' ? 'Inactive' : 'Active';
+        const confirmationMessage = `Are you sure you want to ${action} admin user ${adminId}?`;
+
+        if (confirm(confirmationMessage)) {
+            const row = buttonElement.closest('tr');
+            const statusCell = row.querySelector('td:nth-child(5) span'); // 5th column is Status
+
+            if (newStatus === 'Active') {
+                statusCell.textContent = 'Active';
+                statusCell.classList.remove('bg-red-100', 'text-red-800');
+                statusCell.classList.add('bg-green-100', 'text-green-800');
+                buttonElement.textContent = 'Deactivate';
+                buttonElement.classList.remove('text-green-600', 'hover:text-green-900');
+                buttonElement.classList.add('text-red-600', 'hover:text-red-900');
+                buttonElement.setAttribute('onclick', `toggleAdminStatus(this, '${adminId}', 'Active')`);
+            } else { // Inactive
+                statusCell.textContent = 'Inactive';
+                statusCell.classList.remove('bg-green-100', 'text-green-800');
+                statusCell.classList.add('bg-red-100', 'text-red-800');
+                buttonElement.textContent = 'Activate';
+                buttonElement.classList.remove('text-red-600', 'hover:text-red-900');
+                buttonElement.classList.add('text-green-600', 'hover:text-green-900');
+                buttonElement.setAttribute('onclick', `toggleAdminStatus(this, '${adminId}', 'Inactive')`);
+            }
+            console.log(`Admin user ${adminId} status changed to ${newStatus}`);
+            // In a real application, this update would be sent to the backend.
+        }
+    }
+
+    let currentEditingAdminId = null;
+
+    function openEditPermissionsModal(adminId, adminName, adminRole) {
+        currentEditingAdminId = adminId;
+        document.getElementById('permAdminId').textContent = adminId;
+        document.getElementById('permAdminName').textContent = adminName;
+        document.getElementById('permAdminRole').textContent = adminRole;
+
+        // Reset all checkboxes
+        const checkboxes = document.querySelectorAll('#editPermissionsForm input[type="checkbox"]');
+        checkboxes.forEach(cb => {
+            cb.checked = false;
+            cb.disabled = false;
+        });
+
+        // Set permissions based on role (simplified logic)
+        if (adminRole === 'Super Admin') {
+            checkboxes.forEach(cb => {
+                cb.checked = true;
+                cb.disabled = true; // Super admin has all permissions, non-editable
+            });
+        } else if (adminRole === 'Customer Care') {
+            document.getElementById('permManageUsers').checked = true;
+            document.getElementById('permManageProperties').checked = true;
+        } else if (adminRole === 'Accountant') {
+            document.getElementById('permViewReports').checked = true;
+            document.getElementById('permManageSettings').checked = true; // Example: Accountants might manage certain financial settings
+        }
+        // For other roles or more granular control, expand this logic
+
+        document.getElementById('editPermissionsModal').style.display = 'flex';
+    }
+
+    function closeEditPermissionsModal() {
+        document.getElementById('editPermissionsModal').style.display = 'none';
+        currentEditingAdminId = null;
+    }
+
+    function savePermissions() {
+        if (!currentEditingAdminId) return;
+
+        const selectedPermissions = [];
+        document.querySelectorAll('#editPermissionsForm input[type="checkbox"]:checked').forEach(cb => {
+            selectedPermissions.push(cb.value);
+        });
+
+        alert(`Simulating: Permissions saved for ${currentEditingAdminId}:\n${selectedPermissions.join(', ')}`);
+        // In a real app, you'd send this data to a backend.
+        closeEditPermissionsModal();
+    }
+</script>
+</body>
+</html>

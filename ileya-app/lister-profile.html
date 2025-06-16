@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lister Profile - Ileya</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-gray-50 font-sans">
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="max-w-4xl mx-auto">
+            <!-- Back Button -->
+            <div class="mb-8">
+                <button onclick="history.back()" class="inline-flex items-center text-sm font-medium text-gray-600 hover:text-gray-900">
+                    <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+                    </svg>
+                    Back
+                </button>
+            </div>
+
+            <div id="lister-profile-container">
+                <!-- Loading State -->
+                <div id="loading-state" class="text-center py-20">
+                    <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-red-600 mx-auto"></div>
+                    <p class="mt-4 text-lg text-gray-600">Loading lister profile...</p>
+                </div>
+
+                <!-- Error State -->
+                <div id="error-state" class="hidden text-center py-20 bg-red-50 p-8 rounded-lg">
+                    <p class="text-lg text-red-600">Could not load lister profile. Please try again later.</p>
+                </div>
+
+                <!-- Dynamic Content Area -->
+                <div id="lister-content" class="hidden">
+                    <!-- Lister details will be injected here -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            const listerContent = document.getElementById('lister-content');
+            const loadingState = document.getElementById('loading-state');
+            const errorState = document.getElementById('error-state');
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const listerId = urlParams.get('id');
+
+            if (!listerId) {
+                loadingState.style.display = 'none';
+                errorState.style.display = 'block';
+                errorState.innerHTML = '<p class="text-lg text-red-600">No lister ID provided in the URL.</p>';
+                return;
+            }
+
+            try {
+                const response = await fetch(`/api/listers/${listerId}`);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch lister profile.');
+                }
+                const data = await response.json();
+
+                if (data.success) {
+                    renderProfile(data.lister, data.viewerId);
+                    loadingState.style.display = 'none';
+                    listerContent.style.display = 'block';
+                } else {
+                    throw new Error(data.message || 'An unknown error occurred.');
+                }
+            } catch (error) {
+                console.error('Error loading lister profile:', error);
+                loadingState.style.display = 'none';
+                errorState.style.display = 'block';
+                errorState.innerHTML = `<p class="text-lg text-red-600">${error.message}</p>`;
+            }
+        });
+
+        function renderStarRating(averageRating, reviewCount) {
+            const container = document.getElementById('overall-rating-container');
+            if (!container) return;
+
+            const rating = parseFloat(averageRating);
+            let starsHTML = '';
+            for (let i = 1; i <= 5; i++) {
+                if (i <= rating) {
+                    starsHTML += '<i class="fas fa-star text-yellow-500"></i>'; // Full star
+                } else if (i - 0.5 <= rating) {
+                    starsHTML += '<i class="fas fa-star-half-alt text-yellow-500"></i>'; // Half star
+                } else {
+                    starsHTML += '<i class="far fa-star text-yellow-500"></i>'; // Empty star
+                }
+            }
+
+            container.innerHTML = `
+                <div class="flex items-center">${starsHTML}</div>
+                <p class="ml-2 text-sm text-gray-600">${averageRating} out of 5 (${reviewCount} reviews)</p>
+            `;
+        }
+
+        function renderProfile(lister, viewerId) {
+            const listerContent = document.getElementById('lister-content');
+            const isOwnProfile = lister.id === viewerId;
+
+            const reviewCount = lister.reviews ? lister.reviews.length : 0;
+            const averageRating = reviewCount > 0 ? calculateAverageRating(lister.reviews).toFixed(1) : 0;
+
+            renderStarRating(averageRating, reviewCount);
+
+            const whatsappLink = lister.phone_number ? `https://wa.me/${formatWhatsappNumber(lister.phone_number)}?text=${encodeURIComponent(`Hello, I'm interested in your profile on Ileya.`)}` : '#';
+            const callLink = lister.phone_number ? `tel:${lister.phone_number}` : '#';
+
+            const reviewsHTML = lister.reviews.length > 0 
+                ? lister.reviews.map(review => `
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <div class="flex items-start">
+                            <img src="${review.reviewer_image || '/uploads/avatars/default-avatar.png'}" alt="${review.reviewer_name}" class="w-12 h-12 rounded-full mr-4">
+                            <div>
+                                <p class="font-semibold text-gray-800">${review.reviewer_name}</p>
+                                <div class="flex items-center mt-1">
+                                    ${renderStars(review.rating)}
+                                </div>
+                                <p class="text-gray-600 mt-2">${review.comment}</p>
+                                <p class="text-xs text-gray-400 mt-2">${new Date(review.created_at).toLocaleDateString()}</p>
+                            </div>
+                        </div>
+                    </div>
+                `).join('')
+                : '<p class="text-gray-500">This lister has no reviews yet.</p>';
+
+            const reviewFormHTML = !isOwnProfile && viewerId ? `
+                <div class="mt-10">
+                    <div class="bg-white rounded-lg shadow-md">
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-gray-800 mb-4">Reviews</h3>
+                            <div class="reviews-container max-h-[400px] overflow-y-auto pb-4 pr-4">
+                                ${reviewsHTML}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    ${!isOwnProfile && viewerId ? `
+                    <div class="mt-6 bg-white p-8 rounded-lg shadow-md">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4">Leave a Review</h3>
+                        <form id="review-form">` : ''}
+                        <div class="mb-4">
+                            <label for="rating" class="block text-sm font-medium text-gray-700 mb-2">Your Rating</label>
+                            <div class="flex items-center text-2xl star-rating">
+                                ${[1, 2, 3, 4, 5].map(star => `<i class="far fa-star text-gray-400 cursor-pointer" data-value="${star}"></i>`).join('')}
+                            </div>
+                            <input type="hidden" name="rating" id="rating" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="comment" class="block text-sm font-medium text-gray-700">Your Comment</label>
+                            <textarea id="comment" name="comment" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-red-600 text-white py-3 px-4 rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition duration-150 ease-in-out">Submit Review</button>
+                    </form>
+                </div>
+            ` : '';
+
+            listerContent.innerHTML = `
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div class="p-8">
+                        <div class="md:flex md:items-start">
+                            <img src="${lister.profile_picture || '/uploads/avatars/default-avatar.png'}" alt="${lister.full_name}" class="w-32 h-32 rounded-full mx-auto md:mx-0 md:mr-8">
+                            <div class="text-center md:text-left mt-6 md:mt-0 flex-grow">
+                                <h2 class="text-3xl font-bold text-gray-900">${lister.full_name}</h2>
+                                <p class="text-md text-gray-600 mt-1">Landlord</p>
+                                <p class="text-sm text-gray-500 mt-2">Member since ${new Date(lister.created_at).getFullYear()}</p>
+                                <div class="mt-6 flex justify-center md:justify-start space-x-4">
+                                    <a href="${callLink}" class="bg-red-600 text-white py-2 px-6 rounded-full hover:bg-red-700 transition duration-150 ease-in-out"><i class="fas fa-phone-alt mr-2"></i>Call Now</a>
+                                    <a href="${whatsappLink}" target="_blank" class="bg-green-500 text-white py-2 px-6 rounded-full hover:bg-green-600 transition duration-150 ease-in-out"><i class="fab fa-whatsapp mr-2"></i>Chat on WhatsApp</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white p-8 rounded-lg shadow-md">
+                        <h3 class="text-xl font-bold text-gray-800 mb-4">Listing Statistics</h3>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center">
+                                <p class="text-gray-600">Total Properties Uploaded</p>
+                                <p class="font-bold text-lg text-gray-900">${lister.stats.total}</p>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <p class="text-gray-600">Deleted Properties</p>
+                                <p class="font-bold text-lg text-gray-900">${lister.stats.deleted}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-md">
+                        <h3 class="text-xl font-bold text-gray-800 mb-4">Overall Rating</h3>
+                        <div class="flex items-center mb-4">
+                           ${renderStars(averageRating, 'text-2xl')}
+                           <span class="ml-4 text-gray-600">(${reviewCount} reviews)</span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="mt-10">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6">Reviews</h3>
+                    <div class="space-y-6">
+                        ${reviewsHTML}
+                    </div>
+                </div>
+                
+                ${reviewFormHTML}
+            `;
+
+            // Add event listeners for star rating
+            if (reviewFormHTML) {
+                const stars = document.querySelectorAll('.star-rating .fa-star');
+                const ratingInput = document.getElementById('rating');
+                stars.forEach(star => {
+                    star.addEventListener('mouseover', (e) => highlightStars(e.target.dataset.value));
+                    star.addEventListener('mouseout', () => highlightStars(ratingInput.value));
+                    star.addEventListener('click', (e) => {
+                        ratingInput.value = e.target.dataset.value;
+                        highlightStars(ratingInput.value);
+                    });
+                });
+
+                document.getElementById('review-form').addEventListener('submit', handleReviewSubmit);
+            }
+        }
+
+        function highlightStars(value) {
+            const stars = document.querySelectorAll('.star-rating .fa-star');
+            stars.forEach(star => {
+                if (star.dataset.value <= value) {
+                    star.classList.remove('far');
+                    star.classList.add('fas', 'text-yellow-400');
+                } else {
+                    star.classList.remove('fas', 'text-yellow-400');
+                    star.classList.add('far');
+                }
+            });
+        }
+
+        function renderStars(rating, extraClasses = '') {
+            const fullStars = Math.floor(rating);
+            const halfStar = rating % 1 !== 0;
+            let starsHTML = '';
+            for (let i = 0; i < fullStars; i++) {
+                starsHTML += `<i class="fas fa-star text-yellow-400 ${extraClasses}"></i>`;
+            }
+            if (halfStar) {
+                starsHTML += `<i class="fas fa-star-half-alt text-yellow-400 ${extraClasses}"></i>`;
+            }
+            for (let i = 0; i < 5 - Math.ceil(rating); i++) {
+                starsHTML += `<i class="far fa-star text-gray-300 ${extraClasses}"></i>`;
+            }
+            return starsHTML;
+        }
+
+        function calculateAverageRating(reviews) {
+            if (reviews.length === 0) return 0;
+            const total = reviews.reduce((acc, review) => acc + review.rating, 0);
+            return total / reviews.length;
+        }
+
+        function formatWhatsappNumber(phone) {
+            if (!phone) return '#';
+            let whatsappNumber = phone.replace(/\D/g, '');
+            if (whatsappNumber.startsWith('0')) {
+                whatsappNumber = '234' + whatsappNumber.substring(1);
+            } else if (!whatsappNumber.startsWith('234')) {
+                whatsappNumber = '234' + whatsappNumber;
+            }
+            return whatsappNumber;
+        }
+
+        async function handleReviewSubmit(e) {
+            e.preventDefault();
+            const form = e.target;
+            const rating = form.rating.value;
+            const comment = form.comment.value;
+            const urlParams = new URLSearchParams(window.location.search);
+            const listerId = urlParams.get('id');
+
+            if (!rating) {
+                alert('Please select a rating.');
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/reviews', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ listerId, rating, comment })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    alert('Review submitted successfully!');
+                    location.reload(); // Reload to show the new review
+                } else {
+                    alert(`Error: ${result.message}`);
+                }
+            } catch (error) {
+                console.error('Failed to submit review:', error);
+                alert('An error occurred while submitting your review.');
+            }
+        }
+
+    </script>
+
+</body>
+</html>
