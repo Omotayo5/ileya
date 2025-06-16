@@ -127,11 +127,9 @@
             const loadingSpinner = `...`; // Keep your spinner HTML
             const noResultsHTML = `...`; // Keep your no results HTML
 
-            const createRentalCard = (rental, isRecycled = false) => {
-                const recycledBadge = isRecycled ? `<div class="absolute top-0 left-0 bg-yellow-500 text-white text-xs font-bold px-3 py-1 m-2 rounded-full z-10">SEEN BEFORE</div>` : '';
+            const createRentalCard = (rental) => {
                 return `
                     <div class="group bg-white rounded-xl shadow-md overflow-hidden transform hover:-translate-y-1 transition-all duration-300 hover:shadow-xl relative">
-                        ${recycledBadge}
                         <a href="property-details.html?id=${rental.id}" class="block">
                             <div class="relative">
                                 <img src="${rental.photos && rental.photos.length > 0 ? './uploads/rentals/' + rental.photos[0] : 'https://via.placeholder.com/400x300.png?text=No+Image'}" alt="${rental.title}" class="w-full h-52 object-cover group-hover:scale-105 transition-transform duration-300">
