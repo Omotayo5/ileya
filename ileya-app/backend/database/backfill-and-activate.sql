@@ -1,5 +1,9 @@
 -- Step 1: Create 'inactive' subscriptions for any user who doesn't have one.
 -- This ensures every user has a subscription record to begin with.
+ALTER TABLE users
+ADD COLUMN reset_token VARCHAR(255) NULL,
+ADD COLUMN reset_token_expires DATETIME NULL;
+
 INSERT INTO user_subscriptions (user_id, plan_id, status, start_date, end_date)
 SELECT
     u.id,
