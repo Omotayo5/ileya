@@ -5,7 +5,80 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>List New Rental - Ileya</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* Fancy form fields */
+        form#createRentalForm input[type="text"],
+        form#createRentalForm input[type="number"],
+        form#createRentalForm input[type="tel"],
+        form#createRentalForm select {
+            width: 100%;
+            background: #ffffff;
+            padding: 0.75rem 1rem;
+            border: 1px solid #d1d5db; /* gray-300 */
+            border-radius: 0.5rem; /* rounded-lg */
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+            font-size: 0.875rem; /* sm */
+            line-height: 1.25rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        form#createRentalForm input[type="text"]::placeholder,
+        form#createRentalForm input[type="number"]::placeholder,
+        form#createRentalForm input[type="tel"]::placeholder {
+            color: #9ca3af; /* gray-400 */
+        }
+
+        form#createRentalForm input[type="text"]:focus,
+        form#createRentalForm input[type="number"]:focus,
+        form#createRentalForm input[type="tel"]:focus,
+        form#createRentalForm select:focus {
+            border-color: #dc2626; /* red-600 */
+            box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.25);
+            outline: none;
+        }
+
+        /* Fancy select arrow */
+        form#createRentalForm select {
+            -moz-appearance: none;
+            -webkit-appearance: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg fill='none' stroke='%236B7280' stroke-width='2' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+            background-size: 1rem;
+            padding-right: 2.5rem; /* space for arrow */
+        }
+        /* --- Fancy photo upload boxes --- */
+        .photo-upload-box .border-dashed {
+            transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+            border-radius: 0.75rem; /* rounded-xl */
+            background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
+        }
+        .photo-upload-box:hover .border-dashed {
+            border-color: #dc2626; /* red-600 */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+            transform: translateY(-2px);
+        }
+        .photo-upload-box .text-gray-500 {
+            color: #6b7280; /* gray-500 */
+            transition: opacity 0.25s ease;
+        }
+        .photo-upload-box:hover .text-gray-500 {
+            opacity: 0.7;
+        }
+        .photo-upload-box .preview-container img {
+            border-radius: 0.75rem;
+            object-fit: cover;
+        }
+        .photo-upload-box button {
+            background: #ef4444; /* red-500 */
+            transition: background 0.25s ease;
+        }
+        .photo-upload-box button:hover {
+            background: #dc2626; /* red-600 */
+        }
+    </style>
 </head>
 <body class="bg-gray-50 font-sans">
     <!-- Main Content -->
