@@ -4,7 +4,7 @@ const pool = require('./database/db'); // Your database connection pool
 const { sendEmail } = require('../../mailer');
 
 async function handleLogin(req, res) {
-    const { email, password } = req.body;
+    const { email, password, rememberMe } = req.body;
 
     console.log('Login attempt received for email:', email);
 
@@ -48,7 +48,13 @@ async function handleLogin(req, res) {
             email: user.email,
             fullName: user.full_name
         };
-        req.session.userId = user.id;
+                req.session.userId = user.id;
+
+        if (rememberMe) {
+            req.session.cookie.maxAge = 30 * 24 * 60 * 60 * 1000; // 30 days
+        } else {
+            req.session.cookie.expires = false;
+        }
 
         req.session.save((err) => {
             if (err) {
@@ -75,7 +81,7 @@ async function handleLogin(req, res) {
                 success: true,
                 message: 'Login successful!',
                 user: req.session.user,
-                redirect: 'user-dashboard.html'
+                redirect: 'member-properties.html'
             });
         });
 

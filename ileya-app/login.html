@@ -146,6 +146,7 @@
             const form = event.target;
             const email = form.email.value;
             const password = form.password.value;
+            const rememberMe = form['remember-me'].checked;
             const loginButton = document.getElementById('loginButton');
             const originalBtnText = loginButton.innerHTML;
 
@@ -156,7 +157,7 @@
                 const response = await fetch('/api/login', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email, password })
+                    body: JSON.stringify({ email, password, rememberMe })
                 });
 
                 const data = await response.json();
