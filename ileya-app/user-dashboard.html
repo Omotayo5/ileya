@@ -187,13 +187,20 @@
             const grid = document.getElementById('dashboard-rentals-grid');
             const welcomeMessage = document.querySelector('h1');
             const activeRentalsCountEl = document.getElementById('active-rentals-count');
-            const deletedRentalsCountEl = document.getElementById('deleted-rentals-count');
+            // const deletedRentalsCountEl removed;
             const subStatusEl = document.getElementById('subscription-status');
             const propertiesCard = document.getElementById('properties-card');
             const listerCard = document.getElementById('lister-card');
             const subExpiryEl = document.getElementById('subscription-expiry');
             
 
+            // Remove Deleted Rentals card from stats overview
+            document.querySelectorAll('.text-sm.text-gray-500').forEach(el=>{
+                if(el.textContent.trim() === 'Deleted Rentals'){
+                    const card = el.closest('.p-6');
+                    if(card) card.remove();
+                }
+            });
             const noRentalsHTML = `
                 <div class="col-span-full text-center py-10 px-4">
                     <svg class="mx-auto h-12 w-12 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path></svg>
@@ -222,7 +229,7 @@
                         }
                         if (user.rentalStats) {
                             activeRentalsCountEl.textContent = user.rentalStats.active || 0;
-                            deletedRentalsCountEl.textContent = user.rentalStats.deleted || 0;
+
                         }
                     } else {
                         showToast(profileData.message || 'Could not load profile data.', 'error');
