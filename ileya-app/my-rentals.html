@@ -10,9 +10,12 @@
 </head>
 <body class="bg-gray-50 font-sans">
 
-    <div x-data="{ sidebarOpen: false }" class="min-h-screen flex flex-col bg-gray-50 font-sans">
+    <div x-data="{ sidebarOpen: false }" @keydown.escape.window="sidebarOpen = false" class="min-h-screen flex flex-col bg-gray-50 font-sans">
+                <!-- Sidebar backdrop -->
+        <div x-show="sidebarOpen" @click="sidebarOpen = false" class="fixed inset-0 z-30 bg-gray-900 bg-opacity-50 transition-opacity duration-300 ease-in-out md:hidden" x-cloak></div>
+
         <!-- Sidebar -->
-        <aside class="fixed inset-y-0 left-0 z-40 w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out md:translate-x-0" :class="{'-translate-x-full': !sidebarOpen, 'translate-x-0': sidebarOpen}">
+        <aside class="fixed inset-y-0 left-0 z-40 w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out md:translate-x-0" :class="{'-translate-x-full': !sidebarOpen, 'translate-x-0': sidebarOpen}" x-cloak>
             <div class="flex items-center justify-center h-20 border-b">
                 <a href="index.html" class="flex items-center">
                     <img src="Img/logo.svg" alt="Ileya Logo" style="height:40px;" class="mr-2">
