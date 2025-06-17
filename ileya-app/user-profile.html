@@ -6,7 +6,7 @@
     <title>My Profile - Ileya</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <style>
         /* Profile Picture Container */
         .profile-pic-container {
@@ -192,13 +192,18 @@
     <div id="toast-container" class="fixed top-24 right-5 z-50"></div>
 
     <script>
-        function showToast(message, type = 'success', duration = 5000) {
+        // --- Toast Notification ---
+        function showToast(message, type = 'info', duration = 5000) {
             const container = document.getElementById('toast-container');
             if (!container) return;
 
             const toast = document.createElement('div');
-            const bgColor = type === 'success' ? 'bg-green-500' : 'bg-red-500';
-            toast.className = `p-4 rounded-lg shadow-lg text-white ${bgColor} transform transition-all duration-300 ease-in-out translate-x-full opacity-0`;
+            const typeClasses = {
+                success: 'bg-green-500',
+                error: 'bg-red-500',
+                info: 'bg-blue-500'
+            };
+            toast.className = `p-4 rounded-lg shadow-lg text-white ${typeClasses[type] || 'bg-gray-800'} transform transition-all duration-300 ease-in-out translate-x-full opacity-0`;
             toast.style.minWidth = '250px';
             toast.innerHTML = `
                 <div class="flex items-center justify-between">
@@ -206,62 +211,25 @@
                     <button class="ml-4 text-white font-bold" onclick="this.parentElement.parentElement.remove();">&times;</button>
                 </div>
             `;
-
             container.appendChild(toast);
-
             setTimeout(() => {
                 toast.classList.remove('translate-x-full', 'opacity-0');
                 toast.classList.add('translate-x-0', 'opacity-100');
             }, 100);
-
-            const closeToast = () => {
+            setTimeout(() => {
                 toast.classList.remove('translate-x-0', 'opacity-100');
                 toast.classList.add('translate-x-full', 'opacity-0');
                 setTimeout(() => toast.remove(), 300);
-            };
-
-            setTimeout(closeToast, duration);
+            }, duration);
         }
 
-        // Function to update profile picture state
-        function updateProfilePictureState(hasPicture) {
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- DOM Elements ---
             const profilePictureImg = document.getElementById('profilePictureImg');
-            const defaultIcon = document.getElementById('defaultProfileIcon');
-            
-            if (hasPicture) {
-                profilePictureImg.style.display = 'block';
-                profilePictureImg.style.opacity = '1';
-                defaultIcon.style.opacity = '0';
-                defaultIcon.style.pointerEvents = 'none';
-            } else {
-                profilePictureImg.style.display = 'none';
-                profilePictureImg.style.opacity = '0';
-                defaultIcon.style.opacity = '1';
-                defaultIcon.style.pointerEvents = 'auto';
-            }
-        }
-
-        // Set up MutationObserver to watch for changes to the image element
-        function setupProfilePictureObserver() {
-            const profilePictureImg = document.getElementById('profilePictureImg');
-            const observer = new MutationObserver((mutations) => {
-                mutations.forEach(mutation => {
-                    if (mutation.type === 'attributes' && mutation.attributeName === 'src') {
-                        console.log('Profile picture src changed:', mutation.oldValue, '->', profilePictureImg.src);
-                        // If the src is being set to something unexpected, reset it
-                        if (profilePictureImg.src && !profilePictureImg.src.startsWith('/uploads/avatars/')) {
-                            console.log('Preventing unwanted image update');
-                            profilePictureImg.src = '';
-                            updateProfilePictureState(false);
-                        }
-                    }
-                });
-        document.addEventListener('DOMContentLoaded', async () => {
-            // Get all DOM elements
-            const profilePictureImg = document.getElementById('profilePictureImg');
+            const defaultProfileIcon = document.getElementById('defaultProfileIcon');
             const profilePictureInput = document.getElementById('profilePictureInput');
-            const fullNameEl = document.querySelector('.text-center h2');
-            const emailEl = document.querySelector('.text-center p');
+            const fullNameDisplay = document.querySelector('.text-center h2');
+            const emailDisplay = document.querySelector('.text-center p');
             const profileForm = document.getElementById('profileInfoForm');
             const fullNameInput = document.getElementById('fullName');
             const emailInput = document.getElementById('email');
@@ -269,84 +237,57 @@
             const updateBtn = document.getElementById('updateProfileBtn');
             const originalBtnText = updateBtn.textContent;
 
-            // Set up MutationObserver for profile picture
-            const observer = new MutationObserver((mutations) => {
-                mutations.forEach(mutation => {
-                    if (mutation.type === 'attributes' && mutation.attributeName === 'src') {
-                        console.log('Profile picture src changed:', mutation.oldValue, '->', profilePictureImg.src);
-                        // Prevent unwanted images
-                        if (profilePictureImg.src && !profilePictureImg.src.startsWith('/uploads/avatars/') && profilePictureImg.src !== '') {
-                            console.log('Preventing unwanted image update:', profilePictureImg.src);
-                            profilePictureImg.src = '';
-                            updateProfilePictureState(false);
-                        }
-                    }
-                });
-            });
+            // --- UI Update Function ---
+            function updateProfileView(user) {
+                if (!user) return;
+                fullNameDisplay.textContent = user.fullName || 'User Name';
+                emailDisplay.textContent = user.email || 'user@example.com';
+                fullNameInput.value = user.fullName || '';
+                emailInput.value = user.email || '';
+                phoneNumberInput.value = user.phoneNumber || '';
 
-            // Start observing the profile picture element
-            observer.observe(profilePictureImg, {
-                attributes: true,
-                attributeFilter: ['src']
-            });
-
-            // Initial state - show default icon
-            updateProfilePictureState(false);
-
-            try {
-                const response = await fetch('/api/profile', { credentials: 'include' });
-                if (response.status === 401) {
-                    window.location.href = 'login.html';
-                    return;
-                }
-                const data = await response.json();
-                if (data.success) {
-                    const { user } = data;
-                    fullNameEl.textContent = user.fullName;
-                    emailEl.textContent = user.email;
-                    fullNameInput.value = user.fullName;
-                    emailInput.value = user.email;
-                    phoneNumberInput.value = user.phoneNumber || '';
-                    
-                    // Handle profile picture
-                    if (user.profilePicture) {
-                        // Only set the src if we have a valid profile picture
-                        if (user.profilePicture.startsWith('/uploads/avatars/')) {
-                            // First clear any existing src to prevent race conditions
-                            profilePictureImg.src = '';
-                            // Wait a brief moment to ensure the src is cleared
-                            setTimeout(() => {
-                                profilePictureImg.src = user.profilePicture;
-                                updateProfilePictureState(true);
-                            }, 100);
-                        } else {
-                            console.log('Invalid profile picture path:', user.profilePicture);
-                            profilePictureImg.src = '';
-                            updateProfilePictureState(false);
-                        }
-                    } else {
-                        // Clear the src
-                        profilePictureImg.src = '';
-                        // Update the picture state
-                        updateProfilePictureState(false);
-                    }
+                if (user.profilePicture && user.profilePicture.startsWith('/uploads/avatars/')) {
+                    profilePictureImg.src = user.profilePicture + '?' + new Date().getTime(); // Cache-bust
+                    profilePictureImg.style.display = 'block';
+                    defaultProfileIcon.style.display = 'none';
                 } else {
-                    showToast(data.message || 'Could not load profile.', 'error');
+                    profilePictureImg.src = '';
+                    profilePictureImg.style.display = 'none';
+                    defaultProfileIcon.style.display = 'flex';
                 }
-            } catch (error) {
-                console.error('Error fetching profile:', error);
-                showToast('An error occurred while loading your profile.', 'error');
             }
 
+            // --- API Functions ---
+            async function fetchProfile() {
+                try {
+                    const response = await fetch('/api/profile', { credentials: 'include' });
+                    if (response.status === 401) {
+                        window.location.href = 'login.html';
+                        return;
+                    }
+                    const data = await response.json();
+                    if (data.success) {
+                        updateProfileView(data.user);
+                    } else {
+                        showToast(data.message || 'Could not load profile.', 'error');
+                    }
+                } catch (error) {
+                    console.error('Error fetching profile:', error);
+                    showToast('An error occurred while loading your profile.', 'error');
+                }
+            }
+
+            // --- Event Handlers ---
             profileForm.addEventListener('submit', async (event) => {
                 event.preventDefault();
                 updateBtn.disabled = true;
-                updateBtn.innerHTML = '<svg class="animate-spin h-5 w-5 text-white mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>';
+                updateBtn.innerHTML = `<svg class="animate-spin h-5 w-5 text-white mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>`;
 
                 try {
                     const response = await fetch('/api/profile', {
                         method: 'PUT',
-                        headers: { 'Content-Type': 'application/json', 'Credentials': 'include' },
+                        headers: { 'Content-Type': 'application/json' },
+                        credentials: 'include',
                         body: JSON.stringify({ phoneNumber: phoneNumberInput.value })
                     });
                     const data = await response.json();
@@ -368,7 +309,7 @@
                 const file = event.target.files[0];
                 if (!file) return;
 
-                showToast('Uploading picture...', 'success');
+                showToast('Uploading picture...', 'info');
                 const formData = new FormData();
                 formData.append('profilePicture', file);
 
@@ -379,9 +320,9 @@
                         body: formData
                     });
                     const data = await response.json();
-                    if (data.success) {
+                    if (data.success && data.filePath) {
                         showToast('Picture updated successfully!', 'success');
-                        profilePictureImg.src = data.filePath + '?' + new Date().getTime();
+                        updateProfileView({ profilePicture: data.filePath });
                     } else {
                         showToast(data.message || 'Failed to upload picture.', 'error');
                     }
@@ -390,6 +331,9 @@
                     showToast('An error occurred during upload.', 'error');
                 }
             });
+
+            // --- Initial Load ---
+            fetchProfile();
         });
     </script>
 </body>
