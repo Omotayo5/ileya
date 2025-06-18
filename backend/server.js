@@ -1,42 +1,47 @@
+const path = require('path');
+
+
 // c:\Users\USER\Documents\Ileya\server.js
 const express = require('express');
-const path = require('path');
+
+// Root folder where frontend lives after restructure
+const FRONTEND_ROOT = path.join(__dirname, '..', 'frontend');
 const fs = require('fs');
-const { handleRegistration } = require('./ileya-app/backend/registerHandler');
-const { handleLogin } = require('./ileya-app/backend/loginHandler');
+const { handleRegistration } = require('./registerHandler');
+const { handleLogin } = require('./loginHandler');
 const session = require('express-session');
-const { getProfile, updateProfile, requireLogin, upload, updateProfilePicture } = require('./ileya-app/backend/userProfileHandler');
-const { createRental } = require('./ileya-app/backend/createRentalHandler');
-const { getMyRentals } = require('./ileya-app/backend/getRentalsHandler');
-const rentalHandler = require('./ileya-app/backend/rentalHandler');
-const { getRentalById } = require('./ileya-app/backend/rentalDetailsHandler');
-const subscriptionHandler = require('./ileya-app/backend/subscriptionHandler');
-const { confirmPayment } = require('./ileya-app/backend/paymentConfirmHandler');
-const { getSubscriptionStatus } = require('./ileya-app/backend/subscriptionStatusHandler');
-const { getSubscriptionDetails } = require('./ileya-app/backend/subscriptionDetailsHandler');
-const { getListerProfile } = require('./ileya-app/backend/listerProfileHandler');
-const { submitReview } = require('./ileya-app/backend/reviewHandler');
-const { handleReport } = require('./ileya-app/backend/reportHandler');
-const { handleForgotPassword, handleResetPassword } = require('./ileya-app/backend/passwordResetHandler');
+const { getProfile, updateProfile, requireLogin, upload, updateProfilePicture } = require('./userProfileHandler');
+const { createRental } = require('./createRentalHandler');
+const { getMyRentals } = require('./getRentalsHandler');
+const rentalHandler = require('./rentalHandler');
+const { getRentalById } = require('./rentalDetailsHandler');
+const subscriptionHandler = require('./subscriptionHandler');
+const { confirmPayment } = require('./paymentConfirmHandler');
+const { getSubscriptionStatus } = require('./subscriptionStatusHandler');
+const { getSubscriptionDetails } = require('./subscriptionDetailsHandler');
+const { getListerProfile } = require('./listerProfileHandler');
+const { submitReview } = require('./reviewHandler');
+const { handleReport } = require('./reportHandler');
+const { handleForgotPassword, handleResetPassword } = require('./passwordResetHandler');
 const multer = require('multer');
-const { pool: dbPool } = require('./ileya-app/backend/db'); // Import raw pool for graceful shutdown
-require('./ileya-app/backend/subscriptionCron');
-require('./ileya-app/backend/emailCron'); // Schedule daily subscription status updates
+const { pool: dbPool } = require('./db'); // Import raw pool for graceful shutdown
+require('./subscriptionCron');
+require('./emailCron'); // Schedule daily subscription status updates
 
 // Ensure the upload directories exist
-const uploadsDirAvatars = path.join(__dirname, 'ileya-app', 'uploads', 'avatars');
+const uploadsDirAvatars = path.join(FRONTEND_ROOT, 'uploads', 'avatars');
 if (!fs.existsSync(uploadsDirAvatars)) {
     fs.mkdirSync(uploadsDirAvatars, { recursive: true });
     console.log(`Created directory: ${uploadsDirAvatars}`);
 }
-const uploadsDirProperties = path.join(__dirname, 'ileya-app', 'uploads', 'properties');
+const uploadsDirProperties = path.join(FRONTEND_ROOT, 'uploads', 'properties');
 if (!fs.existsSync(uploadsDirProperties)) {
     fs.mkdirSync(uploadsDirProperties, { recursive: true });
     console.log(`Created directory: ${uploadsDirProperties}`);
 }
 
 // Ensure rentals upload directory exists
-const uploadsDirRentals = path.join(__dirname, 'ileya-app', 'uploads', 'rentals');
+const uploadsDirRentals = path.join(FRONTEND_ROOT, 'uploads', 'rentals');
 if (!fs.existsSync(uploadsDirRentals)) {
     fs.mkdirSync(uploadsDirRentals, { recursive: true });
     console.log(`Created directory: ${uploadsDirRentals}`);
@@ -72,12 +77,11 @@ app.use(session({
   }
 }));
 
-// Serve static files from the 'ileya-app' directory
-// This makes files like register.html accessible via http://localhost:3000/register.html
-app.use(express.static(path.join(__dirname, 'ileya-app')));
+// Serve static files from the rebuilt frontend directory
+app.use(express.static(FRONTEND_ROOT));
 
-// Serve uploaded files statically
-app.use('/uploads', express.static(path.join(__dirname, 'ileya-app/uploads')));
+// Serve uploaded files (avatars, rentals, etc.)
+app.use('/uploads', express.static(path.join(FRONTEND_ROOT, 'uploads')));
 
 // Multer configuration for rental photos
 const rentalStorage = multer.diskStorage({
@@ -148,7 +152,7 @@ app.post('/api/reset-password', handleResetPassword);
 
 // Basic route for the root, serves index.html from the ileya-app directory
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'ileya-app', 'index.html'));
+  res.sendFile(path.join(FRONTEND_ROOT, 'index.html'));
 });
 
 function startServer(p) {

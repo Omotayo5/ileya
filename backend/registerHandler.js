@@ -1,7 +1,7 @@
 // c:\Users\USER\Documents\Ileya\ileya-app\backend\registerHandler.js
 const bcrypt = require('bcrypt');
 const pool = require('./database/db'); // Assuming db.js is in the same directory
-const { sendEmail } = require('../../mailer');
+const { sendEmail } = require('./mailer');
 
 const SALT_ROUNDS = 10;
 

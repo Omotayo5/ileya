@@ -2,10 +2,11 @@
   "name": "ileya-backend",
   "version": "1.0.0",
   "description": "Backend for Ileya application",
-  "main": "server.js",
+  "main": "backend/server.js",
   "scripts": {
-    "start": "nodemon server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon backend/server.js",
+    "start": "node backend/server.js",
+    "build:css": "tailwindcss -i ./frontend/ileya-app/css/input.css -o ./frontend/ileya-app/css/style.css --minify"
   },
   "dependencies": {
     "bcrypt": "^5.1.0",

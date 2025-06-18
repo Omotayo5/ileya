@@ -1,7 +1,7 @@
 const crypto = require('crypto');
 const bcrypt = require('bcrypt');
 const pool = require('./database/db');
-const { sendEmail } = require('../../mailer');
+const { sendEmail } = require('./mailer');
 
 const SALT_ROUNDS = 10;
 

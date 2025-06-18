@@ -1,7 +1,6 @@
-// c:\Users\USER\Documents\Ileya\ileya-app\backend\loginHandler.js
 const bcrypt = require('bcrypt');
 const pool = require('./database/db'); // Your database connection pool
-const { sendEmail } = require('../../mailer');
+const { sendEmail } = require('./mailer');
 
 async function handleLogin(req, res) {
     const { email, password, rememberMe } = req.body;

@@ -3,7 +3,7 @@ const path = require('path');
 const fs = require('fs').promises;
 const multer = require('multer');
 const upload = multer({ dest: 'uploads/rentals/' });
-const { sendEmail } = require('../../mailer.js');
+const { sendEmail } = require('./mailer');
 require('dotenv').config();
 
 const createRental = async (req, res) => {

@@ -1,6 +1,6 @@
 const cron = require('node-cron');
 const db = require('./db');
-const sendEmail = require('../../mailer');
+const { sendEmail } = require('./mailer');
 
 console.log('Email cron jobs module loaded.');
 

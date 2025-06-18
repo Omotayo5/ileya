@@ -6,7 +6,7 @@
     <title>My Profile - Ileya</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
     <style>
         /* Profile Picture Container */
         .profile-pic-container {
@@ -87,7 +87,7 @@
         <!-- Sidebar -->
         <aside class="fixed inset-y-0 left-0 z-40 w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out md:translate-x-0" :class="{'-translate-x-full': !sidebarOpen, 'translate-x-0': sidebarOpen}" x-cloak>
             <div class="flex items-center justify-center h-20 border-b">
-                                <a href="index.html" class="flex items-center">
+                <a href="member-properties.html" class="flex items-center">
                     <img src="Img/logo.svg" alt="Ileya Logo" style="height:40px;" class="mr-2">
                     <span class="sr-only">Ileya</span>
                 </a>
@@ -292,6 +292,7 @@
                 event.preventDefault();
                 updateBtn.disabled = true;
                 updateBtn.innerHTML = `<svg class="animate-spin h-5 w-5 text-white mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>`;
+                let isSuccess = false;
 
                 try {
                     const response = await fetch('/api/profile', {
@@ -303,15 +304,20 @@
                     const data = await response.json();
                     if (data.success) {
                         showToast('Profile updated successfully!', 'success');
+                        updateProfileView(data.user);
+                        phoneNumberInput.disabled = true; // Disable phone input on success
+                        isSuccess = true;
                     } else {
-                        showToast(data.message || 'Failed to update profile.', 'error');
+                        throw new Error(data.message || 'Failed to update profile.');
                     }
                 } catch (error) {
-                    console.error('Error updating profile:', error);
-                    showToast('An error occurred while updating.', 'error');
+                    showToast(`Error: ${error.message}`, 'error');
                 } finally {
-                    updateBtn.disabled = false;
-                    updateBtn.textContent = originalBtnText;
+                    if (!isSuccess) {
+                        // Only re-enable button on failure
+                        updateBtn.disabled = false;
+                        updateBtn.textContent = originalBtnText;
+                    }
                 }
             });
 
@@ -331,8 +337,11 @@
                     });
                     const data = await response.json();
                     if (data.success && data.filePath) {
-                        showToast('Picture updated successfully!', 'success');
-                        updateProfileView({ profilePicture: data.filePath });
+                        showToast('Profile updated successfully!', 'success');
+                        document.getElementById('phoneNumber').disabled = true;
+                        document.querySelector('#profileInfoForm button').disabled = true;
+                        // Re-fetch the entire profile to ensure all data is up-to-date
+                        fetchProfile();
                     } else {
                         showToast(data.message || 'Failed to upload picture.', 'error');
                     }

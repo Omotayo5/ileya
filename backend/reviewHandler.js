@@ -1,5 +1,5 @@
 const pool = require('./database/db');
-const sendEmail = require('../../mailer.js');
+const { sendEmail } = require('./mailer');
 require('dotenv').config();
 
 const submitReview = async (req, res) => {

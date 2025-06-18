@@ -1,5 +1,5 @@
 const db = require('./database/db');
-const { sendEmail } = require('../../mailer.js');
+const { sendEmail } = require('./mailer');
 
 async function subscriptionHandler(req, res) {
     if (!req.session.userId) {

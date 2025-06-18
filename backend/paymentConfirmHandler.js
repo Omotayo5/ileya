@@ -1,5 +1,5 @@
 const db = require('./db');
-const sendEmail = require('../../mailer');
+const { sendEmail } = require('./mailer');
 const fetch = require('node-fetch');
 require('dotenv').config();
 

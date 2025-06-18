@@ -8,7 +8,9 @@ const path = require('path');
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         // The destination directory for uploads. This path is relative to the project root.
-        cb(null, 'ileya-app/uploads/avatars/');
+        // Correctly resolve the path to be absolute, ensuring it's always correct
+        const dest = path.resolve(__dirname, '..', 'frontend', 'uploads', 'avatars');
+        cb(null, dest);
     },
     filename: function (req, file, cb) {
         // Create a unique filename to prevent overwriting files with the same name.
