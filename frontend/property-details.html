@@ -106,10 +106,27 @@
         function renderPropertyDetails(property) {
             const propertyContent = document.getElementById('property-content');
             const photos = property.photos && property.photos.length > 0 ? property.photos : ['/images/placeholder.png'];
-            const mainPhotoUrl = photos[0].startsWith('http') ? photos[0] : `/uploads/rentals/${photos[0]}`;
+            const cacheBuster = '?t=' + Date.now();
+            const encode = (str) => encodeURIComponent(str).replace(/%2F/g, '/');
+            let mainPhotoUrl;
+            const firstPhoto = photos[0] || '';
+            if (/^https?:\/\//.test(firstPhoto) || firstPhoto.startsWith('/uploads')) {
+                mainPhotoUrl = encode(firstPhoto) + cacheBuster;
+            } else if (firstPhoto.includes('uploads/')) {
+                mainPhotoUrl = '/' + encode(firstPhoto) + cacheBuster;
+            } else {
+                mainPhotoUrl = `/uploads/rentals/${encode(firstPhoto)}${cacheBuster}`;
+            }
 
             const thumbnailsHTML = photos.map((photo, index) => {
-                const photoUrl = photo.startsWith('http') ? photo : `/uploads/rentals/${photo}`;
+                let photoUrl;
+                if (/^https?:\/\//.test(photo) || photo.startsWith('/uploads')) {
+                    photoUrl = encode(photo) + cacheBuster;
+                } else if (photo.includes('uploads/')) {
+                    photoUrl = '/' + encode(photo) + cacheBuster;
+                } else {
+                    photoUrl = `/uploads/rentals/${encode(photo)}${cacheBuster}`;
+                }
                 return `
                     <div class="cursor-pointer" onclick="changeImage('${photoUrl}', this)">
                         <img src="${photoUrl}" alt="Thumbnail ${index + 1}" class="w-full h-24 object-cover rounded-lg ${index === 0 ? 'thumbnail-active' : ''}">

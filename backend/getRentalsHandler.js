@@ -19,7 +19,16 @@ const getMyRentals = async (req, res) => {
 
         // The 'photos' column is a JSON string, so we parse it for the frontend.
         const processedRentals = rentals.map(rental => {
-            const photoArr = JSON.parse(rental.photos || '[]').map(p => p.includes('uploads/rentals/') ? p.split('/').pop() : p);
+            const photoArr = JSON.parse(rental.photos || '[]').map(p => {
+                if (!p) return p;
+                if (/^https?:\/\//.test(p) || p.startsWith('/uploads')) {
+                    return p;
+                }
+                if (p.includes('uploads/') && !p.startsWith('/')) {
+                    return '/' + p;
+                }
+                return p;
+            });
             return { ...rental, photos: photoArr };
         });
 
@@ -45,7 +54,16 @@ const getAllRentals = async (req, res) => {
 
         // The 'photos' column is a JSON string, so we parse it.
         const processedRentals = rentals.map(rental => {
-            const photoArr = JSON.parse(rental.photos || '[]').map(p => p.includes('uploads/rentals/') ? p.split('/').pop() : p);
+            const photoArr = JSON.parse(rental.photos || '[]').map(p => {
+                if (!p) return p;
+                if (/^https?:\/\//.test(p) || p.startsWith('/uploads')) {
+                    return p;
+                }
+                if (p.includes('uploads/') && !p.startsWith('/')) {
+                    return '/' + p;
+                }
+                return p;
+            });
             return { ...rental, photos: photoArr };
         });
 

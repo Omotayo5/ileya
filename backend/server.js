@@ -81,7 +81,10 @@ app.use(session({
 app.use(express.static(FRONTEND_ROOT));
 
 // Serve uploaded files (avatars, rentals, etc.)
+// 1) New location inside frontend folder
 app.use('/uploads', express.static(path.join(FRONTEND_ROOT, 'uploads')));
+// 2) Legacy location inside backend/uploads (before restructure)
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Multer configuration for rental photos
 const rentalStorage = multer.diskStorage({

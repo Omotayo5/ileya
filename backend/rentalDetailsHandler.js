@@ -36,13 +36,18 @@ const getRentalById = async (req, res) => {
 
                 try {
             let photos = JSON.parse(rental.photos || '[]');
-            // Clean up photo paths to handle both old (full path) and new (filename only) formats
+            // Normalize photo paths while preserving uploads directory
             rental.photos = photos.map(photo => {
-                if (photo.includes('uploads/rentals/')) {
-                    // If the full path is stored, return only the filename
-                    return photo.split('/').pop();
+                if (!photo) return photo;
+                // If already absolute external URL or starts with /uploads, keep as-is
+                if (/^https?:\/\//.test(photo) || photo.startsWith('/uploads')) {
+                    return photo;
                 }
-                // Otherwise, assume it's already just the filename
+                // If contains uploads directory but missing leading slash
+                if (photo.includes('uploads/') && !photo.startsWith('/')) {
+                    return '/' + photo;
+                }
+                // Otherwise leave it (just filename) - frontend will prefix
                 return photo;
             });
         } catch (e) {

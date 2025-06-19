@@ -18,7 +18,11 @@ const processRentals = (rentals) => {
             // The 'photos' column is TEXT, so we need to parse it as JSON
             const photos = JSON.parse(rental.photos);
             // Ensure photos is an array and not empty
-            const photoPath = Array.isArray(photos) && photos.length > 0 ? photos[0] : null;
+            let photoPath = Array.isArray(photos) && photos.length > 0 ? photos[0] : null;
+            // For legacy rows where full path is stored without a leading slash, prepend one
+            if (photoPath && photoPath.includes('uploads/') && !photoPath.startsWith('/')) {
+                photoPath = '/' + photoPath;
+            }
             return {
                 ...rental,
                 photos: photoPath ? [photoPath] : [] // Keep it as an array for consistency
