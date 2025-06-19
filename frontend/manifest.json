@@ -1,0 +1,21 @@
+{
+  "name": "Ileya Property Rentals",
+  "short_name": "Ileya",
+  "description": "Find and list rental properties across Nigeria.",
+  "start_url": "/frontend/member-properties.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#dc2626",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

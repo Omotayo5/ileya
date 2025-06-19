@@ -6,6 +6,10 @@
     <title>User Dashboard - Ileya</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#dc2626">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 <body class="bg-gray-50 font-sans">
@@ -322,6 +326,53 @@
                 showToast('Could not load your properties.', 'error');
                 grid.innerHTML = noRentalsHTML;
             }
+        });
+    </script>
+    <!-- PWA Install Button -->
+    <button id="install-button" class="hidden fixed bottom-4 right-4 bg-red-600 text-white px-4 py-2 rounded-lg shadow-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 z-50">
+        <i class="fas fa-download mr-2"></i> Install App
+    </button>
+
+    <script>
+        // Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js');
+            });
+        }
+
+        // PWA Custom Install Prompt
+        let deferredPrompt;
+        const installButton = document.getElementById('install-button');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            // Prevent the default browser prompt
+            e.preventDefault();
+            // Stash the event so it can be triggered later.
+            deferredPrompt = e;
+            // Show our custom install button
+            installButton.classList.remove('hidden');
+        });
+
+        installButton.addEventListener('click', async () => {
+            // Hide our button
+            installButton.classList.add('hidden');
+            // Show the browser's install prompt.
+            deferredPrompt.prompt();
+            // Wait for the user to respond to the prompt.
+            const { outcome } = await deferredPrompt.userChoice;
+            // We can log the outcome if we want.
+            console.log(`User response to the install prompt: ${outcome}`);
+            // The prompt can only be used once, so we nullify it.
+            deferredPrompt = null;
+        });
+
+        // Listen for the appinstalled event
+        window.addEventListener('appinstalled', () => {
+            // Hide the install button if the app is installed
+            installButton.classList.add('hidden');
+            deferredPrompt = null;
+            console.log('Ileya PWA was installed');
         });
     </script>
 </body>

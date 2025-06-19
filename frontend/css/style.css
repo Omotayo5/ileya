@@ -1,6 +1,28 @@
 /* Custom styles can go here if needed, supplementing Tailwind */
 body {
-    font-family: 'Poppins', sans-serif; /* Example: Adding a custom font */
+    margin: 0; /* Remove default browser margin to allow full-width layouts on mobile */
+    font-family: 'Poppins', sans-serif; /* Custom font */
+}
+
+/* Mobile tweaks */
+@media (max-width: 640px) {
+    /* Shrink generic paddings set by Tailwind utility classes */
+    .p-6, .px-6, .py-6 { padding: 1rem !important; }
+    .p-8, .px-8, .py-8 { padding: 1.25rem !important; }
+    .p-10, .px-10, .py-10 { padding: 1.5rem !important; }
+
+    /* Reduce gaps */
+    .gap-6 { gap: 1rem !important; }
+
+    /* Heading scale-down */
+    h1 { font-size: 1.75rem !important; }
+    h2 { font-size: 1.5rem !important; }
+    h3 { font-size: 1.25rem !important; }
+
+    .container {
+        padding-left: 0.75rem; /* 3 */
+        padding-right: 0.75rem;
+    }
 }
 
 /* You might want to add custom styles for specific components 

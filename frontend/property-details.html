@@ -7,6 +7,10 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#dc2626">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
     <style>
         .thumbnail-active {
             border: 2px solid #DC2626; /* red-600 */
@@ -247,6 +251,43 @@
             }
             return whatsappNumber;
         }
+    </script>
+    <!-- PWA Install Button -->
+    <button id="install-button" class="hidden fixed bottom-4 right-4 bg-red-600 text-white px-4 py-2 rounded-lg shadow-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 z-50">
+        <i class="fas fa-download mr-2"></i> Install App
+    </button>
+
+    <script>
+        // Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js');
+            });
+        }
+
+        // PWA Custom Install Prompt
+        let deferredPrompt;
+        const installButton = document.getElementById('install-button');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installButton.classList.remove('hidden');
+        });
+
+        installButton.addEventListener('click', async () => {
+            installButton.classList.add('hidden');
+            deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+            console.log(`User response to the install prompt: ${outcome}`);
+            deferredPrompt = null;
+        });
+
+        window.addEventListener('appinstalled', () => {
+            installButton.classList.add('hidden');
+            deferredPrompt = null;
+            console.log('Ileya PWA was installed');
+        });
     </script>
 </body>
 </html>

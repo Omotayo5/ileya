@@ -6,6 +6,10 @@
     <title>List New Rental - Ileya</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
+    <!-- PWA -->
+    <link rel="manifest" href="../manifest.json">
+    <meta name="theme-color" content="#dc2626">
+    <link rel="apple-touch-icon" href="../icons/icon-192.png">
     <style>
         /* Fancy form fields */
         form#createRentalForm input[type="text"],
@@ -91,7 +95,7 @@
         </nav>
     </header>
     <!-- Main Content -->
-    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <main class="container mx-auto px-3 sm:px-6 lg:px-8 py-8">
         <div class="max-w-4xl mx-auto">
             <!-- Back Button -->
             <div class="mb-8">
@@ -103,7 +107,7 @@
                 </button>
             </div>
 
-            <div class="bg-white p-8 sm:p-10 rounded-xl shadow-lg">
+            <div class="bg-white p-6 sm:p-10 rounded-xl shadow-lg">
                 <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-8">List a New Rental Property</h1>
             
             <form id="createRentalForm" class="space-y-6">
@@ -423,21 +427,29 @@
             const file = input.files[0];
             if (!file) return;
 
+            // Validation
             if (!file.type.startsWith('image/')) {
                 showToast('Please upload an image file (JPEG, PNG, etc.)', 'error');
                 input.value = '';
                 return;
             }
-
             if (file.size > 5 * 1024 * 1024) {
                 showToast('Image size should be less than 5MB', 'error');
                 input.value = '';
                 return;
             }
 
+            const uploadBox = input.closest('.photo-upload-box');
+            const previewContainer = uploadBox.querySelector('.preview-container');
+            const uploadText = uploadBox.querySelector('.text-center');
+
+            // Show loading spinner
+            previewContainer.innerHTML = '<div class="flex items-center justify-center w-full h-full"><svg class="animate-spin h-6 w-6 text-red-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg></div>';
+            if (uploadText) uploadText.style.display = 'none';
+
             const reader = new FileReader();
             reader.onload = function(e) {
-                const previewContainer = input.closest('.photo-upload-box').querySelector('.preview-container');
+                // Replace spinner with actual preview
                 previewContainer.innerHTML = `
                     <div class="relative w-full h-full">
                         <img src="${e.target.result}" alt="Preview ${index + 1}" class="w-full h-full object-cover">
@@ -447,14 +459,11 @@
                             ×
                         </button>
                     </div>`;
-                
-                const uploadText = input.nextElementSibling.querySelector('.text-center');
-                if (uploadText) uploadText.style.display = 'none';
-                
-                input.nextElementSibling.classList.remove('border-dashed', 'border-gray-300');
-                input.nextElementSibling.classList.add('border-solid', 'border-red-200');
+                uploadBox.classList.remove('border-dashed', 'border-gray-300');
+                uploadBox.classList.add('border-solid', 'border-red-200');
             };
-            reader.readAsDataURL(file);
+            // Small timeout lets spinner paint before heavy work
+            setTimeout(() => reader.readAsDataURL(file), 50);
         }
 
         function removePhoto(button, index) {
@@ -473,11 +482,37 @@
             uploadArea.classList.add('border-dashed', 'border-gray-300');
         }
 
+        // --- Utility: Compress image using canvas to speed up upload ---
+        async function compressImage(file, maxWidth = 1280, quality = 0.7) {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                img.onload = () => {
+                    const scale = Math.min(1, maxWidth / img.width);
+                    const canvas = document.createElement('canvas');
+                    canvas.width = img.width * scale;
+                    canvas.height = img.height * scale;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    canvas.toBlob(blob => {
+                        if (blob) {
+                            resolve(blob);
+                        } else {
+                            reject(new Error('Image compression failed'));
+                        }
+                    }, 'image/jpeg', quality);
+                };
+                img.onerror = () => reject(new Error('Failed to load image for compression'));
+                const reader = new FileReader();
+                reader.onload = e => { img.src = e.target.result; };
+                reader.onerror = () => reject(new Error('FileReader failed'));
+                reader.readAsDataURL(file);
+            });
+        }
+
         document.getElementById('createRentalForm').addEventListener('submit', async function(event) {
             event.preventDefault();
 
             const form = event.target;
-            const formData = new FormData(form);
             const submitButton = form.querySelector('button[type="submit"]');
             const originalButtonText = submitButton.innerHTML;
 
@@ -485,6 +520,29 @@
             submitButton.innerHTML = '<svg class="animate-spin h-5 w-5 text-white mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>';
 
             try {
+                // Build FormData manually so we can compress images first
+                const formData = new FormData();
+
+                // Append non-file fields
+                Array.from(form.elements).forEach(el => {
+                    if (!el.name || el.type === 'file') return;
+                    if (el.type === 'checkbox') {
+                        if (el.checked) formData.append(el.name, el.value);
+                    } else {
+                        formData.append(el.name, el.value);
+                    }
+                });
+
+                // Handle photos: compress before appending
+                const fileInputs = form.querySelectorAll('input[type="file"][name="photos"]');
+                for (const input of fileInputs) {
+                    if (input.files[0]) {
+                        const compressedBlob = await compressImage(input.files[0]);
+                        const fileName = input.files[0].name.replace(/\.[^/.]+$/, '.jpg');
+                        formData.append('photos', compressedBlob, fileName);
+                    }
+                }
+
                 const response = await fetch('/api/rentals/create', {
                     method: 'POST',
                     body: formData,
@@ -516,5 +574,12 @@
         });
     </script>
 
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('../sw.js');
+            });
+        }
+    </script>
 </body>
 </html>
